@@ -1,0 +1,8 @@
+﻿<Window x:Class="E_Parser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="516" Width="798">
+    <Grid>
+    	<TreeView HorizontalAlignment="Left" Height="485" VerticalAlignment="Top" Width="183"/>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Custom="http://schemas.awesomium.com/winfx" x:Class="TheE_Parser.MainWindow"
+        Title="XPath extractor" Height="782" Width="1070
+    " Loaded="Window_Loaded" Closed="Window_Closed" WindowStyle="ThreeDBorderWindow">
+    <Grid Background="#FFFF2323">
+        <Grid HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="1062" Background="#FF153D72">
+            <TextBox x:Name="tbxUrl" HorizontalAlignment="Left" Height="23" Margin="54,10,0,0" TextWrapping="Wrap" Text="http://rozetka.com.ua/" VerticalAlignment="Top" Width="870" KeyDown="tbxUrl_KeyDown"/>
+            <Button x:Name="btnNavigate" Content="Navigate" HorizontalAlignment="Left" Margin="929,10,0,0" VerticalAlignment="Top" Width="79" Height="23" Background="#FFE55245" Foreground="#FF64060A" Click="btnNavigate_Click"/>
+            <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="39" Height="24" Click="btnBack_Click"/>
+        </Grid>
+        <Custom:WebControl x:Name="awwebPicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="448" Width="1052" Margin="0,49,0,0"/>
+        <Grid HorizontalAlignment="Left" Height="249" Margin="0,502,0,0" VerticalAlignment="Top" Width="1062" Background="#FF243C7E">
+            <TextBox x:Name="tbxXPath" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="335" TextChanged="tbxXPath_TextChanged"/>
+            <Button x:Name="btnGetParent" Content="Get parent XPath" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="105" Click="btnGetParent_Click"/>
+            <Button Content="Send to parser" HorizontalAlignment="Left" Margin="120,38,0,0" VerticalAlignment="Top" Width="100"/>
+            <ComboBox x:Name="cmbbxXPathIndex" HorizontalAlignment="Left" Margin="350,10,0,0" VerticalAlignment="Top" Width="57" Height="23" SelectionChanged="cmbbxXPathIndex_SelectionChanged"/>
+            <RichTextBox x:Name="rtbxSourceCode" HorizontalAlignment="Left" Height="173" Margin="0,76,0,0" VerticalAlignment="Top" Width="416">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="&lt;source code&gt;"/>
+                    </Paragraph>
+                    <Paragraph>
+                        <Run/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+            <Custom:WebControl x:Name="awwebDisplay" HorizontalAlignment="Left" Margin="437,0,0,0" VerticalAlignment="Top" Width="620" Height="249"/>
+            <GridSplitter HorizontalAlignment="Left" Height="249" Margin="416,0,0,0" VerticalAlignment="Top" Width="16" Background="#FF1D1F32"/>
+        </Grid>
+    </Grid>
+</Window>
