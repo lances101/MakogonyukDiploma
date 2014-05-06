@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    class TSStart : BaseTaskSequence
+    class TSEnd : BaseTaskSequence
     {
-        public TSStart(TaskSession ts) : base(ts)
+        public TSEnd(TaskSession ts) : base(ts)
         {
-            
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
+            OutputTypes = new List<ParameterTypes>() { ParameterTypes.None };
         }
 
         protected override object _mainTaskMethod(object[] args)
         {
-            Console.WriteLine("Do nothing");
+            Session.EndSession();
             return null;
         }
     }

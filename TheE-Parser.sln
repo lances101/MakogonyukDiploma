@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Parser XPath Extractor", "TheE-Parser\E-Parser XPath Extractor.csproj", "{E13D4511-2393-42EB-9F8F-03A41E98C4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XPath Extractor", "TheE-Parser\XPath Extractor.csproj", "{E13D4511-2393-42EB-9F8F-03A41E98C4D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-Parser", "E-Parser\E-Parser.csproj", "{39F5891C-9AA7-41CA-8D51-9CD1EFE10165}"
 EndProject

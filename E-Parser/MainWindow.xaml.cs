@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using E_Parser.Logic.ElementLogic;
+using E_Parser.UI;
 
 namespace E_Parser
 {
@@ -23,6 +25,19 @@ namespace E_Parser
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TaskSession ts = new TaskSession();
+            ts.StartSession();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            SessionEditor se = new SessionEditor();
+            se.Show();
+
         }
     }
 }

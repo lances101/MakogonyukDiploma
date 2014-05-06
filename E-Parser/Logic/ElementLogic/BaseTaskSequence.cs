@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,15 +9,16 @@ namespace E_Parser.Logic.ElementLogic
 {
     public abstract class BaseTaskSequence
     {
-        public enum eParameterTypes
+        public enum ParameterTypes
         {
-            None, String, Integer, NodeList, Node, Boolean
+            None, Any, String, Integer, NodeList, Node, Boolean
         }
        
-        public eParameterTypes ParameterTypes = eParameterTypes.None;
-        public eParameterTypes ReturnedTypes = eParameterTypes.None;
+        protected List<ParameterTypes> InputTypes { get; set; }
+        protected List<ParameterTypes> OutputTypes { get; set; }
+        public string DirectStringInput { get; set; }
         public BaseTaskSequence NextTask { get; set; }
-        private Func<object, object> _mainTaskMethod;
+        protected abstract object _mainTaskMethod(object[] args);
         protected TaskSession Session;
 
         public BaseTaskSequence(TaskSession ts)
@@ -24,12 +26,7 @@ namespace E_Parser.Logic.ElementLogic
             Session = ts;
         }
 
-        protected void SetMainTask(Func<object, object> func, eParameterTypes acceptsTypes, eParameterTypes returnsTypes)
-        {
-            _mainTaskMethod = func;
-            ParameterTypes = acceptsTypes;
-            ReturnedTypes = returnsTypes;
-        }
+        
         public void StartTask(params object[] args)
         {
             var task = Task.Factory.StartNew(() => 
@@ -40,7 +37,8 @@ namespace E_Parser.Logic.ElementLogic
         }
         private void OnTaskCompleted(object result)
         {
-            NextTask.StartTask(result);
+            if(NextTask.GetType() != typeof(TSEnd))
+                NextTask.StartTask(result);
         }
 
        

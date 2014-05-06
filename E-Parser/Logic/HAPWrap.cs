@@ -10,7 +10,7 @@ namespace E_Parser.Logic
     public class HAPWrap
     {
         private WebView View;
-        private HtmlDocument Document;
+        private HtmlDocument Document = new HtmlDocument();
         public HAPWrap(WebView _view)
         {
             View = _view;

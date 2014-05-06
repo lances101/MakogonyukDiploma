@@ -1,0 +1,14 @@
+﻿<Window x:Class="E_Parser.UI.SessionEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:elements="clr-namespace:E_Parser.Elements"
+        Title="SessionEditor" Height="600" Width="800">
+    <Grid>
+        <TreeView HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="183"/>
+        <ScrollViewer x:Name="SessionViewer" HorizontalAlignment="Left" Height="569" Margin="183,0,0,0" VerticalAlignment="Top" Width="384">
+            <elements:ElemStart HorizontalAlignment="Center" VerticalAlignment="Top" >
+            </elements:ElemStart>
+        </ScrollViewer>
+        <elements:ElemStart HorizontalAlignment="Left" Height="100" Margin="631,119,0,0" VerticalAlignment="Top" Width="100"/>
+    </Grid>
+</Window>

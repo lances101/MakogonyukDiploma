@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Windows.Threading;
 using Awesomium.Core;
 //using Awesomium.Windows.Controls;
 using System;
@@ -39,7 +41,7 @@ namespace TheE_Parser
                 }
                 catch (Exception e)
                 {
-
+                    Console.WriteLine("[JS Callback] Error: " + e.Message);
                 }
                 return "CALLBACK WITH NO ARGUMENTS";
             }
@@ -52,13 +54,14 @@ namespace TheE_Parser
         public AwesomiumWrap()
         {
             _view = WebCore.CreateWebView(1024, 640);
+            _view.DocumentReady += ViewDocumentReady;
             HAP = new HAPWrap(_view);
         }
         public event JSCallbackHandler Callback;
         public HAPWrap HAP;
         WebView _view;
 
-        public WebView Client
+        public WebView View
         {
             get { return _view; }
             set
@@ -70,17 +73,30 @@ namespace TheE_Parser
 
         public bool LoadUrl(string url)
         {
+            if (View.InvokeRequired)
+                return (bool)InvokeWithoutArguments(new Func<bool>(() => LoadUrl(url)));
             try
             {
                 var uri = new Uri(url);
-                Client.Source = uri;
+                View.Source = uri;
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("[URL Validator] Url is invalid");
+                Console.WriteLine("[URL Validator] " + e.Message);
             }
             return false;
+        }
+
+        public void RenderToPng()
+        {
+            if (View.InvokeRequired)
+            {
+                InvokeWithoutArguments(new Action(RenderToPng));
+                return;
+            }
+            Console.WriteLine("SAVING " + ((BitmapSurface) View.Surface).SaveToPNG(@"F:\Debug\debug.png"));
+            Process.Start(@"F:\Debug\debug.png");
         }
         public bool ClickElement(string xpath)
         {
@@ -103,6 +119,10 @@ namespace TheE_Parser
             return false;
         }
 
+        private object InvokeWithoutArguments(Delegate method)
+        {
+            return View.Invoke(method, null);
+        }
         private void ViewDocumentReady(object sender, Awesomium.Core.UrlEventArgs e)
         {
             InjectJQuery();
@@ -131,7 +151,7 @@ namespace TheE_Parser
         }
         void BindMethods()
         {
-            JSObject jsobject = _view.CreateGlobalJavascriptObject("jsobject");
+            JSObject jsobject = _view.CreateGlobalJavascriptObject("awesomeCallBackObject");
             jsobject.Bind("callNETReturnXpath", false, JSHandler);
         }
         void JSHandler(object sender, JavascriptMethodEventArgs args)

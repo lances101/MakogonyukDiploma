@@ -34,12 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Awesomium.Core, Version=1.7.3.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86">
+    <Reference Include="Awesomium.Core, Version=1.7.4.2, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86" />
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\EParser\AwesomiumXPathExtract\Resources\Awesomium.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\EParser\AwesomiumXPathExtract\Resources\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -59,7 +57,10 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Elements\BaseActionElement.xaml">
+    <Compile Include="UI\SessionEditor.xaml.cs">
+      <DependentUpon>SessionEditor.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UI\Elements\ElemStart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -71,19 +72,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Elements\BaseActionElement.xaml.cs">
-      <DependentUpon>BaseActionElement.xaml</DependentUpon>
+    <Compile Include="UI\Elements\ElemStart.xaml.cs">
+      <DependentUpon>ElemStart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AwesomiumWrap.cs" />
     <Compile Include="Logic\ElementLogic\BaseTaskSequence.cs" />
+    <Compile Include="Logic\ElementLogic\TSEnd.cs" />
+    <Compile Include="Logic\ElementLogic\TSFindNodes.cs" />
     <Compile Include="Logic\ElementLogic\TSStart.cs" />
     <Compile Include="Logic\ElementLogic\TaskSession.cs" />
     <Compile Include="Logic\ElementLogic\TSLoadUrl.cs" />
+    <Compile Include="Logic\ElementLogic\TSTextInput.cs" />
     <Compile Include="Logic\HAPWrap.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\SessionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -103,6 +111,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -118,6 +127,7 @@
   <ItemGroup>
     <Content Include="Resources\jquery-1.11.1.min.js" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

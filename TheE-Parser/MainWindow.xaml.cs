@@ -49,7 +49,6 @@ namespace TheE_Parser
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            base.OnClosed(e);
             awwebPicker.Dispose();
             WebCore.Shutdown();
         }

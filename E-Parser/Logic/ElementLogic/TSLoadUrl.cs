@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Awesomium.Core;
 
 namespace E_Parser.Logic.ElementLogic
 {
@@ -10,14 +11,21 @@ namespace E_Parser.Logic.ElementLogic
     {
         public TSLoadUrl(TaskSession ts) : base(ts)
         {
-            task = new Func<object, object>(o => LoadURL(o as string));
-            SetMainTask(task, eParameterTypes.String, eParameterTypes.Boolean);
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.String };
+            OutputTypes = new List<ParameterTypes>() { ParameterTypes.Boolean };
         }
 
-        private Func<object, object> task;
-        private bool LoadURL(string url)
+
+
+        protected override object _mainTaskMethod(object[] args)
         {
-            return Session.Client.LoadUrl(url);
+            if (!Session.Client.LoadUrl(args[0] as string)) return false;
+            while (!Session.Client.View.IsDocumentReady)
+            {
+                
+            }
+            Session.Client.RenderToPng();
+            return true;
         }
     }
 }

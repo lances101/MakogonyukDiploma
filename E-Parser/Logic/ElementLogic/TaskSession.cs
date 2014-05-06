@@ -16,9 +16,26 @@ namespace E_Parser.Logic.ElementLogic
 
         public TaskSession()
         {
-            startingTask = new TSStart(this);
-            startingTask.NextTask = new TSLoadUrl(this);
-
+            Client = new AwesomiumWrap();
+            startingTask = new TSStart(this)
+            {
+                NextTask = new TSTextInput(this)
+                {
+                    DirectStringInput = "http://rozetka.com.ua/",
+                    NextTask =  new TSLoadUrl(this)
+                    {
+                        NextTask = new TSTextInput(this)
+                        {
+                            DirectStringInput = "//li[@class='main-page-m-catalog-subl-i']/a",
+                            NextTask = new TSFindNodes(this)
+                            {
+                                NextTask = new TSEnd(this)
+                            }
+                        }
+                        
+                    }
+                }
+            };
         }
 
         public void StartSession()
@@ -26,5 +43,9 @@ namespace E_Parser.Logic.ElementLogic
             startingTask.StartTask(null);
         }
 
+        public void EndSession()
+        {
+            Console.WriteLine("Session has ended");
+        }
     }
 }
