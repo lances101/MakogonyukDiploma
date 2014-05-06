@@ -14,20 +14,36 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using E_Parser.Logic.ElementLogic;
+using E_Parser.UI.Elements;
 
-namespace E_Parser.Elements
+namespace E_Parser.UI.Elements
 {
-    /// <summary>
-    /// Interaction logic for BaseElement.xaml
-    /// </summary>
-    public partial class ElemStart : UserControl
+
+    public partial class ElemStart : ElemBase
     {
-        private TSStart taskSequence;
+        
         public bool IsRunning { get; set; }
 
         public ElemStart()
         {
-           
+           InitializeComponent();
+           Task = new TSStart(Session);
+        }
+
+        public ElemStart(TaskSession CurrentSession)
+        {
+            InitializeComponent();
+            Task = new TSStart(CurrentSession);
+        }
+
+        public void InitializeTask()
+        {
+            Task = new TSStart(Session);
+        }
+
+        private void rbtnRunning_Checked(object sender, RoutedEventArgs e)
+        {
+            Console.Write("yo");
         }
 
     }

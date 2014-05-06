@@ -7,7 +7,7 @@ using Awesomium.Core;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    class TSLoadUrl : BaseTaskSequence
+    public class TSLoadUrl : TSBase
     {
         public TSLoadUrl(TaskSession ts) : base(ts)
         {

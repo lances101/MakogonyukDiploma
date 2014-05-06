@@ -7,7 +7,7 @@ using HtmlAgilityPack;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    class TSFindNodes : BaseTaskSequence
+    public class TSFindNodes : TSBase
     {
         public TSFindNodes(TaskSession ts) : base(ts)
         {

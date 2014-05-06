@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    class TSTextInput : BaseTaskSequence
+    public class TSTextInput : TSBase
     {
         public TSTextInput(TaskSession ts) : base(ts)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    public abstract class BaseTaskSequence
+    public abstract class TSBase
     {
         public enum ParameterTypes
         {
@@ -17,11 +17,16 @@ namespace E_Parser.Logic.ElementLogic
         protected List<ParameterTypes> InputTypes { get; set; }
         protected List<ParameterTypes> OutputTypes { get; set; }
         public string DirectStringInput { get; set; }
-        public BaseTaskSequence NextTask { get; set; }
+        public TSBase NextTask { get; set; }
         protected abstract object _mainTaskMethod(object[] args);
         protected TaskSession Session;
 
-        public BaseTaskSequence(TaskSession ts)
+        protected TSBase(TaskSession ts)
+        {
+            Session = ts;
+        }
+
+        public void BindToNewSession(TaskSession ts)
         {
             Session = ts;
         }

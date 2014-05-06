@@ -1,0 +1,22 @@
+﻿<elements:ElemBase x:Class="E_Parser.UI.Elements.ElemLoadUrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:elements="clr-namespace:E_Parser.UI.Elements"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="300">
+    <Border BorderBrush="LightGray" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8"  HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="300" Background="#FF0080BB">
+        <Grid>
+            <Grid>
+                <Label HorizontalContentAlignment="Center" Content="Load URL" HorizontalAlignment="Left" Margin="58,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.974,0.75" Height="24" Foreground="White" Width="78"/>
+                <TextBox x:Name="tbxUrl" HorizontalAlignment="Left" Height="23" Margin="10,29,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="258"/>
+            </Grid>
+
+            <Viewbox Height="20" HorizontalAlignment="Right">
+                <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
+            </Viewbox>
+            
+        </Grid>
+    </Border>
+</elements:ElemBase>

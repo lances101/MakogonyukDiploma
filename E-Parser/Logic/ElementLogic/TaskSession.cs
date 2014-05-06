@@ -9,38 +9,23 @@ namespace E_Parser.Logic.ElementLogic
 {
     public class TaskSession
     {
-        List<BaseTaskSequence> taskList = new List<BaseTaskSequence>();
+        List<TSBase> taskList = new List<TSBase>();
         public AwesomiumWrap Client { get; set; }
-        private BaseTaskSequence startingTask;
-
+        
+        public List<TSBase> TaskList
+        {
+            get { return taskList; }
+            set { taskList = value; }
+        }
 
         public TaskSession()
         {
             Client = new AwesomiumWrap();
-            startingTask = new TSStart(this)
-            {
-                NextTask = new TSTextInput(this)
-                {
-                    DirectStringInput = "http://rozetka.com.ua/",
-                    NextTask =  new TSLoadUrl(this)
-                    {
-                        NextTask = new TSTextInput(this)
-                        {
-                            DirectStringInput = "//li[@class='main-page-m-catalog-subl-i']/a",
-                            NextTask = new TSFindNodes(this)
-                            {
-                                NextTask = new TSEnd(this)
-                            }
-                        }
-                        
-                    }
-                }
-            };
         }
 
         public void StartSession()
         {
-            startingTask.StartTask(null);
+            taskList.ElementAt(0).StartTask(null);
         }
 
         public void EndSession()

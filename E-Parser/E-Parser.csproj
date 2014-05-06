@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -57,9 +57,17 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="UI\Elements\ElemBase.cs" />
+    <Compile Include="UI\Elements\ElemLoadUrl.xaml.cs">
+      <DependentUpon>ElemLoadUrl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SessionEditor.xaml.cs">
       <DependentUpon>SessionEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\Elements\ElemLoadUrl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Elements\ElemStart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,7 +84,7 @@
       <DependentUpon>ElemStart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\AwesomiumWrap.cs" />
-    <Compile Include="Logic\ElementLogic\BaseTaskSequence.cs" />
+    <Compile Include="Logic\ElementLogic\TSBase.cs" />
     <Compile Include="Logic\ElementLogic\TSEnd.cs" />
     <Compile Include="Logic\ElementLogic\TSFindNodes.cs" />
     <Compile Include="Logic\ElementLogic\TSStart.cs" />
