@@ -15,6 +15,11 @@ namespace E_Parser.Logic.ElementLogic
             OutputTypes = new List<ParameterTypes>() { ParameterTypes.NodeList};
         }
 
+        public override string GetName
+        {
+            get { return "FindNodes"; }
+        }
+
         protected override object _mainTaskMethod(object[] args)
         {
             HtmlNodeCollection collection = null;

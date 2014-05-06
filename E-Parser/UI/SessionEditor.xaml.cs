@@ -49,16 +49,51 @@ namespace E_Parser.UI
         private void AddNewTask(Type elem)
         {
             ElemBase be = Activator.CreateInstance(elem, CurrentSession) as ElemBase;
-            if(SessionElements.Count > 0)
-                SessionElements.Last().Task.NextTask = be.Task;
-            CurrentSession.TaskList.Add(be.Task);
-            SessionElements.Add(be);
+            if (SessionElements.Count > 0)
+            {
+                if (be is ElemStart) return;
+                if (SessionElements.Last().TryAddNewElement(be))
+                {
+                    CurrentSession.TaskList.Add(be.Task);
+                    SessionElements.Add(be);
+                    SessionViewer.Items.Refresh();
+                }
+            }
+            else
+            {
+                if (be is ElemStart)
+                {
+                    CurrentSession.TaskList.Add(be.Task);
+                    SessionElements.Add(be);
+                    SessionViewer.Items.Refresh();
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddNewTask(typeof(ElemStart));
-            SessionViewer.Items.Refresh();
+            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddNewTask(typeof(ElemTextInput));
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            AddNewTask(typeof(ElemLoadURL));
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            CurrentSession.StartSession();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            AddNewTask(typeof(ElemEnd));
         }
 
        

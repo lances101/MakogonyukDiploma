@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Awesomium.Core;
 
@@ -16,16 +17,23 @@ namespace E_Parser.Logic.ElementLogic
         }
 
 
+        public override string GetName
+        {
+            get { return "LoadURL"; }
+        }
 
         protected override object _mainTaskMethod(object[] args)
         {
             if (!Session.Client.LoadUrl(args[0] as string)) return false;
-            while (!Session.Client.View.IsDocumentReady)
+            while (Session.Client.IsLoading())
             {
                 
             }
             Session.Client.RenderToPng();
             return true;
         }
+
+    
+        
     }
 }

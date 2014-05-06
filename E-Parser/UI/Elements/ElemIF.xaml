@@ -1,0 +1,30 @@
+﻿<elements:ElemBase x:Class="E_Parser.UI.Elements.ElemIF"
+             xmlns:elements="clr-namespace:E_Parser.UI.Elements"
+             xmlns:my="clr-namespace:E_Parser.Logic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:eParser="clr-namespace:E_Parser"
+             xmlns:elementLogic="clr-namespace:E_Parser.Logic.ElementLogic"
+             mc:Ignorable="d" 
+             Height="300" Width="400" MaxHeight="500" MaxWidth="400"
+                   DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Border BorderBrush="LightGray" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8" Background="#FF0080BB">
+        <Grid>
+            <Label HorizontalContentAlignment="Center" Content="If Comparer" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.974,0.75" Height="24" Foreground="White" Width="154"/>
+            <Viewbox Height="20" HorizontalAlignment="Right">
+                <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
+            </Viewbox>
+            <ComboBox x:Name="cmbbxIfType" 
+                      ItemsSource="{Binding Source={my:Enumeration {x:Type elementLogic:IfCompareType}}}"
+                      DisplayMemberPath="Description"
+                      SelectedValue="{Binding CurrentCompareType}"
+                      SelectedValuePath="Value"
+                      HorizontalAlignment="Left" Margin="160,60,0,0" VerticalAlignment="Top" Width="81"/>
+            <ListBox HorizontalAlignment="Left"  Margin="10,100,0,0" VerticalAlignment="Stretch" Width="358"/>
+            
+        </Grid>
+    </Border>
+</elements:ElemBase>

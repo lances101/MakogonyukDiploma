@@ -57,14 +57,46 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="CompareType.cs" />
+    <Compile Include="Logic\ElementLogic\TSIf.cs" />
+    <Compile Include="Logic\ElementLogic\TSWhile.cs" />
+    <Compile Include="Logic\EnumerationExtension.cs" />
+    <Compile Include="UI\Elements\ElemIF.xaml.cs">
+      <DependentUpon>ElemIF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemWhile.xaml.cs">
+      <DependentUpon>ElemWhile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemEnd.xaml.cs">
+      <DependentUpon>ElemEnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Elements\ElemBase.cs" />
-    <Compile Include="UI\Elements\ElemLoadUrl.xaml.cs">
-      <DependentUpon>ElemLoadUrl.xaml</DependentUpon>
+    <Compile Include="UI\Elements\ElemLoadURL.xaml.cs">
+      <DependentUpon>ElemLoadURL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemTextInput.xaml.cs">
+      <DependentUpon>ElemTextInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\SessionEditor.xaml.cs">
       <DependentUpon>SessionEditor.xaml</DependentUpon>
     </Compile>
-    <Page Include="UI\Elements\ElemLoadUrl.xaml">
+    <Page Include="UI\Elements\ElemIF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemWhile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemEnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemLoadURL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Elements\ElemTextInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,7 +121,7 @@
     <Compile Include="Logic\ElementLogic\TSFindNodes.cs" />
     <Compile Include="Logic\ElementLogic\TSStart.cs" />
     <Compile Include="Logic\ElementLogic\TaskSession.cs" />
-    <Compile Include="Logic\ElementLogic\TSLoadUrl.cs" />
+    <Compile Include="Logic\ElementLogic\TSLoadURL.cs" />
     <Compile Include="Logic\ElementLogic\TSTextInput.cs" />
     <Compile Include="Logic\HAPWrap.cs" />
     <Compile Include="MainWindow.xaml.cs">

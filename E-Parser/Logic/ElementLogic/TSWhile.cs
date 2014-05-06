@@ -6,23 +6,21 @@ using System.Threading.Tasks;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    public class TSTextInput : TSBase
+    class TSWhile : TSBase
     {
-        public TSTextInput(TaskSession ts) : base(ts)
+        public TSWhile(TaskSession ts) : base(ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
-            OutputTypes = new List<ParameterTypes>() { ParameterTypes.String };
+            
         }
-
 
         public override string GetName
         {
-            get { return "TextInput"; }
+            get { return "While Loop"; }
         }
 
         protected override object _mainTaskMethod(object[] args)
         {
-            return DirectStringInput;
+            return null;
         }
     }
 }

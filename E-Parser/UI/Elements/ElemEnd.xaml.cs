@@ -19,12 +19,12 @@ using E_Parser.UI.Elements;
 namespace E_Parser.UI.Elements
 {
 
-    public partial class ElemStart : ElemBase
+    public partial class ElemEnd : ElemBase
     {
-        public ElemStart(TaskSession CurrentSession)
+        public ElemEnd(TaskSession CurrentSession)
         {
             InitializeComponent();
-            Task = new TSStart(CurrentSession);
+            Task = new TSEnd(CurrentSession);
         }
         private void rbtnRunning_Checked(object sender, RoutedEventArgs e)
         {

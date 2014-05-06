@@ -19,16 +19,13 @@ using E_Parser.UI.Elements;
 namespace E_Parser.UI.Elements
 {
 
-    public partial class ElemStart : ElemBase
+    public partial class ElemIF : ElemBase
     {
-        public ElemStart(TaskSession CurrentSession)
+        public IfCompareType CurrentCompareType { get; set ;}
+        public ElemIF(TaskSession CurrentSession)
         {
             InitializeComponent();
-            Task = new TSStart(CurrentSession);
-        }
-        private void rbtnRunning_Checked(object sender, RoutedEventArgs e)
-        {
-            Console.Write("yo");
+            Task = new TSIf(CurrentSession);
         }
 
     }

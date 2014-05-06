@@ -22,11 +22,41 @@ namespace E_Parser.UI.Elements
     public class ElemBase : UserControl
     {
         protected TSBase _task;
-
+        public bool IsRunning { get; set; }
         public ElemBase()
         {
             Console.WriteLine("CONSTRUCTOR CALL!");
         }
+
+        public bool CanAddNextElement(ElemBase next)
+        {
+            if (next.Task.InputTypes.Contains(TSBase.ParameterTypes.Any)) return true;
+            if((from outp in Task.OutputTypes 
+                 from inp in next.Task.InputTypes 
+                 where outp == inp 
+                 select outp)
+                 .Any())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool TryAddNewElement(ElemBase next)
+        {
+            if (!CanAddNextElement(next)) return false;
+            _task.NextTask = next.Task;
+            NextElementReaction(next);
+            return true;
+        }
+
+        public virtual void NextElementReaction(ElemBase next)
+        {
+
+        }
+
+
+
         public TaskSession Session
         {
             get
@@ -53,10 +83,7 @@ namespace E_Parser.UI.Elements
                 new PropertyMetadata(default(TaskSession), OnItemsPropertyChanged));
         private static void OnItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ElemStart)
-            {
-                (d as ElemStart).InitializeTask();
-            }
+            
         }
        
     }

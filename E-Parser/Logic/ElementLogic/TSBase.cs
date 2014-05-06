@@ -13,9 +13,10 @@ namespace E_Parser.Logic.ElementLogic
         {
             None, Any, String, Integer, NodeList, Node, Boolean
         }
-       
-        protected List<ParameterTypes> InputTypes { get; set; }
-        protected List<ParameterTypes> OutputTypes { get; set; }
+
+        public abstract string GetName { get; }
+        public List<ParameterTypes> InputTypes { get; set; }
+        public List<ParameterTypes> OutputTypes { get; set; }
         public string DirectStringInput { get; set; }
         public TSBase NextTask { get; set; }
         protected abstract object _mainTaskMethod(object[] args);
@@ -23,6 +24,7 @@ namespace E_Parser.Logic.ElementLogic
 
         protected TSBase(TaskSession ts)
         {
+            
             Session = ts;
         }
 

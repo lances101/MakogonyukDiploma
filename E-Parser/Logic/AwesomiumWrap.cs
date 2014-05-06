@@ -71,6 +71,7 @@ namespace TheE_Parser
             }
         }
 
+
         public bool LoadUrl(string url)
         {
             if (View.InvokeRequired)
@@ -88,6 +89,14 @@ namespace TheE_Parser
             return false;
         }
 
+        public bool IsLoading()
+        {
+            if (View.InvokeRequired)
+            {
+                return (bool)InvokeWithoutArguments(new Func<bool>(IsLoading));
+            }
+            return View.IsLoading;
+        }
         public void RenderToPng()
         {
             if (View.InvokeRequired)

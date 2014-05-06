@@ -1,0 +1,22 @@
+﻿<elements:ElemBase x:Class="E_Parser.UI.Elements.ElemTextInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:elements="clr-namespace:E_Parser.UI.Elements"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="300">
+    <Border BorderBrush="LightGray" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8"  HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="300" Background="#FF0080BB">
+        <Grid>
+            <Grid>
+                <Label x:Name="lblTitle" HorizontalContentAlignment="Center" Content="Text Input for " HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.974,0.75" Height="29" Foreground="White" Width="258" Margin="10,0,26,0"/>
+                <TextBox x:Name="tbxUrl" HorizontalAlignment="Left" Height="23" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" TextChanged="tbxUrl_TextChanged"/>
+            </Grid>
+
+            <Viewbox Height="20" HorizontalAlignment="Right">
+                <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
+            </Viewbox>
+
+        </Grid>
+    </Border>
+</elements:ElemBase>

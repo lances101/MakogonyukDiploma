@@ -12,17 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using E_Parser.Logic.ElementLogic;
 
 namespace E_Parser.UI.Elements
 {
     /// <summary>
-    /// Interaction logic for ElemLoadUrl.xaml
+    /// Interaction logic for ElemLoadURL.xaml
     /// </summary>
-    public partial class ElemLoadUrl : ElemBase
+    public partial class ElemLoadURL : ElemBase
     {
-        public ElemLoadUrl()
+        public ElemLoadURL(TaskSession ts)
         {
             InitializeComponent();
+            Task = new TSLoadUrl(ts);
+            
         }
     }
 }

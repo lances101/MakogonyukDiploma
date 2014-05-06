@@ -14,6 +14,11 @@ namespace E_Parser.Logic.ElementLogic
             OutputTypes = new List<ParameterTypes>() { ParameterTypes.None };
         }
 
+        public override string GetName
+        {
+            get { return "StartSession"; }
+        }
+
         protected override object _mainTaskMethod(object[] args)
         {
             return null;
