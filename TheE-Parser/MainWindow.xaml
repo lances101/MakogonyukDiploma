@@ -11,8 +11,8 @@
             <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="39" Height="24" Click="btnBack_Click"/>
         </Grid>
         <Custom:WebControl x:Name="awwebPicker" HorizontalAlignment="Left" VerticalAlignment="Top" Height="448" Width="1052" Margin="0,49,0,0"/>
-        <Grid HorizontalAlignment="Left" Height="249" Margin="0,502,0,0" VerticalAlignment="Top" Width="1062" Background="#FF243C7E">
-            <TextBox x:Name="tbxXPath" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="335" TextChanged="tbxXPath_TextChanged"/>
+        <Grid HorizontalAlignment="Left" Height="249" Margin="0,502,0,0" VerticalAlignment="Top" Width="416" Background="#FF243C7E">
+            <TextBox x:Name="tbxXPath" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" TextChanged="tbxXPath_TextChanged"/>
             <Button x:Name="btnGetParent" Content="Get parent XPath" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="105" Click="btnGetParent_Click"/>
             <Button Content="Send to parser" HorizontalAlignment="Left" Margin="120,38,0,0" VerticalAlignment="Top" Width="100"/>
             <ComboBox x:Name="cmbbxXPathIndex" HorizontalAlignment="Left" Margin="350,10,0,0" VerticalAlignment="Top" Width="57" Height="23" SelectionChanged="cmbbxXPathIndex_SelectionChanged"/>
@@ -26,8 +26,11 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Custom:WebControl x:Name="awwebDisplay" HorizontalAlignment="Left" Margin="437,0,0,0" VerticalAlignment="Top" Width="620" Height="249"/>
-            <GridSplitter HorizontalAlignment="Left" Height="249" Margin="416,0,0,0" VerticalAlignment="Top" Width="16" Background="#FF1D1F32"/>
+            <Image x:Name="XPathIndicatorImage" DataContext="Resources/checkmarkGreen.png" HorizontalAlignment="Left" Height="22" Margin="296,11,0,0" VerticalAlignment="Top" Width="22"/>
         </Grid>
+        <Grid HorizontalAlignment="Left" Height="249" Margin="432,502,0,0" VerticalAlignment="Top" Width="620">
+            <Custom:WebControl x:Name="awwebDisplay" />
+        </Grid>
+        <GridSplitter HorizontalAlignment="Left" Height="249" Margin="416,502,0,0" VerticalAlignment="Top" Width="16" Background="#FF1D1F32" IsEnabled="False"/>
     </Grid>
 </Window>

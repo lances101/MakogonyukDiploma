@@ -30,7 +30,7 @@ function getXPath(element) {
     return xpath;
 }
 function getNode(node) {
-    var nodeTag = node.tagName;
+    var nodeTag = node.tagName.toLowerCase();
     if (!nodeTag) return null;
     if (node.id != '') {
         nodeTag += "[@id='" + node.id + "']";
@@ -43,7 +43,7 @@ function getNode(node) {
     var rank = 0;
     var ps = node.previousElementSibling;
     while (ps) {
-        if (ps.tagName == node.tagName)
+        if (ps.tagName.toLowerCase() == node.tagName.toLowerCase())
             rank++;
         ps = ps.previousElementSibling;
     }
@@ -56,7 +56,7 @@ function getNode(node) {
         while (ns) {
 
             count++;
-            if (ns.tagName == node.tagName) {
+            if (ns.tagName.toLowerCase() == node.tagName.toLowerCase()) {
                 nodeTag += "[" + getChildIndex(ns) + "]";
                 break;
             }
@@ -72,7 +72,7 @@ function getChildIndex(node) {
     var child = parent.childNodes[0];
     if (!child) alert("HOLY FUCKING COWS, HOW IS THIS POSSIBLE");
     while (child) {
-        if (child.tagName != node.tagName) {
+        if (child.tagName.toLowerCase() != node.tagName.toLowerCase()) {
             child = child.nextElementSibling;
             continue;
         }

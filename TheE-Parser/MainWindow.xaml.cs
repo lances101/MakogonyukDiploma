@@ -34,6 +34,7 @@ namespace TheE_Parser
             awesomeTools.Client.DocumentReady += Client_DocumentReady;
             awesomeTools.Callback += JSCallback_Handler;
             hapTools.displayTools.Callback += JSCallback_Handler;
+            awesomeTools.Client.Source = new Uri("http://google.com/");
         }
 
         void Client_DocumentReady(object sender, UrlEventArgs e)
@@ -61,7 +62,7 @@ namespace TheE_Parser
 
         private void btnNavigate_Click(object sender, RoutedEventArgs e)
         {
-            if (!tbxUrl.Text.StartsWith("http://"))
+            if (!tbxUrl.Text.StartsWith("http://") || !tbxUrl.Text.StartsWith("https://"))
                 tbxUrl.Text = "http://" + tbxUrl.Text;
 
             awwebPicker.Source = new Uri(tbxUrl.Text);
@@ -70,12 +71,20 @@ namespace TheE_Parser
         private void tbxXPath_TextChanged(object sender, TextChangedEventArgs e)
         {
             int count = hapTools.TestXPath(awesomeTools.OuterHtml, tbxXPath.Text);
+            
             if (count != -1)
             {
+                cmbbxXPathIndex.Visibility = Visibility.Visible;
+               XPathIndicatorImage.Source = new BitmapImage(new Uri("/Resources/icon_bad2.png", UriKind.Relative));
                 cmbbxXPathIndex.Items.Clear();
                 for (int i = 0; i < count; i++)
                     cmbbxXPathIndex.Items.Add(i + 1);
                 cmbbxXPathIndex.SelectedIndex = 0;
+            }
+            else
+            {
+                XPathIndicatorImage.Source = new BitmapImage(new Uri("/Resources/icon_bad.png", UriKind.Relative));
+                cmbbxXPathIndex.Visibility = Visibility.Hidden;
             }
         }
 

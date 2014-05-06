@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace TheE_Parser
 {
-    
     public delegate void JSCallbackHandler(object source, JSCallbackArgs e);
     public class JSCallbackArgs : EventArgs
     {
@@ -68,11 +67,6 @@ namespace TheE_Parser
                 
             }
         }
-
-      
-
-       
-
         void wc_DocumentReady(object sender, Awesomium.Core.UrlEventArgs e)
         {
             XPathPickerInject();
@@ -80,7 +74,7 @@ namespace TheE_Parser
         }
         public bool XPathPickerInject()
         {
-            wc.ExecuteJavascript(Properties.Resources.InjectionPackage);
+            wc.ExecuteJavascript(Properties.Resources.JS_ExtractXPath);
             return true;
         }
         public void ParentXPath()
