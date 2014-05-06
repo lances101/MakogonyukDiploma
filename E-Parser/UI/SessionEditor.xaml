@@ -9,6 +9,6 @@
             <elements:ElemStart HorizontalAlignment="Center" VerticalAlignment="Top" >
             </elements:ElemStart>
         </ScrollViewer>
-        <elements:ElemStart HorizontalAlignment="Left" Height="100" Margin="631,119,0,0" VerticalAlignment="Top" Width="100"/>
+
     </Grid>
 </Window>
