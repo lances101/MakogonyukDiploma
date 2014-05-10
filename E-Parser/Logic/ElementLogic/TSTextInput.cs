@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_Parser.UI.Elements;
 
 namespace E_Parser.Logic.ElementLogic
 {
+    [Serializable]
     public class TSTextInput : TSBase
     {
         public TSTextInput(TaskSession ts) : base(ts)
         {
             InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
-            OutputTypes = new List<ParameterTypes>() { ParameterTypes.String };
+            OutputType = ParameterTypes.String;
+            ElemType = typeof(ElemTextInput);
         }
 
 

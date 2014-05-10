@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,13 +23,36 @@ namespace E_Parser.UI
     /// </summary>
     public partial class SessionEditor : Window
     {
-        private readonly TaskSession _session;
+        private TaskSession _session;
         private List<ElemBase> sessionElements = new List<ElemBase>();
 
         public List<ElemBase> SessionElements
         {
             get { return sessionElements; }
             set { sessionElements = value; }
+        }
+
+        public void LoadSession()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (FileStream fs = new FileStream("./lastSession.psf", FileMode.Open))
+            {
+                CurrentSession = (TaskSession) bf.Deserialize(fs);
+            }
+            SessionElements.Clear();
+            foreach (var e in CurrentSession.TaskList)
+            {
+                RestoreTask(e);
+            }
+
+        }
+        public void SaveSession()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (FileStream fs = new FileStream("./lastSession.psf", FileMode.Create))
+            {
+                bf.Serialize(fs, _session);
+            }
         }
 
         public SessionEditor()
@@ -70,6 +95,20 @@ namespace E_Parser.UI
             }
         }
 
+        private void RestoreTask(TSBase task)
+        {
+            ElemBase be = Activator.CreateInstance(task.ElemType, task.Session) as ElemBase;
+            if (SessionElements.Count == 0)
+            {
+                SessionElements.Add(be);
+            }
+            else if (SessionElements.Last().TryAddNewElement(be))
+            {
+                SessionElements.Add(be);
+            }
+            SessionViewer.Items.Refresh();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddNewTask(typeof(ElemStart));
@@ -94,6 +133,16 @@ namespace E_Parser.UI
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             AddNewTask(typeof(ElemEnd));
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            SaveSession();
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            LoadSession();
         }
 
        

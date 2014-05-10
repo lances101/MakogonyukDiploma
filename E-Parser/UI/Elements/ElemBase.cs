@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,23 +20,28 @@ namespace E_Parser.UI.Elements
     /// <summary>
     /// Interaction logic for ElemBase.xaml
     /// </summary>
+    [Serializable]
     public class ElemBase : UserControl
     {
         protected TSBase _task;
         public bool IsRunning { get; set; }
+
         public ElemBase()
         {
-            Console.WriteLine("CONSTRUCTOR CALL!");
+        }
+
+        public ElemBase(TaskSession _sess, TSBase task)
+        {
+            _task = task;
         }
 
         public bool CanAddNextElement(ElemBase next)
         {
             if (next.Task.InputTypes.Contains(TSBase.ParameterTypes.Any)) return true;
-            if((from outp in Task.OutputTypes 
-                 from inp in next.Task.InputTypes 
-                 where outp == inp 
-                 select outp)
-                 .Any())
+            if ((from inp in next.Task.InputTypes
+                where _task.OutputType == inp
+                select inp)
+                .Any())
             {
                 return true;
             }
@@ -52,22 +58,8 @@ namespace E_Parser.UI.Elements
 
         public virtual void NextElementReaction(ElemBase next)
         {
-
         }
 
-
-
-        public TaskSession Session
-        {
-            get
-            {
-                return (TaskSession)GetValue(TaskSessionProperty);
-            }
-            set
-            {
-                SetValue(TaskSessionProperty, value);
-            }
-        }
 
         public TSBase Task
         {
@@ -75,16 +67,10 @@ namespace E_Parser.UI.Elements
             set { _task = value; }
         }
 
-        public static readonly DependencyProperty TaskSessionProperty =
-            DependencyProperty.Register(
-                "Session",
-                typeof(TaskSession),
-                typeof(ElemBase),
-                new PropertyMetadata(default(TaskSession), OnItemsPropertyChanged));
-        private static void OnItemsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public TaskSession Session
         {
-            
+            get { return Task.Session; }
+            set { Task.Session = value; }
         }
-       
     }
 }

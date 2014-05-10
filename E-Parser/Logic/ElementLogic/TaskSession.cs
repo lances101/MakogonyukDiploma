@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using TheE_Parser;
 
 namespace E_Parser.Logic.ElementLogic
 {
+    [Serializable]
     public class TaskSession
     {
-        List<TSBase> taskList = new List<TSBase>();
-        public AwesomiumWrap Client { get; set; }
-        
+        private List<TSBase> taskList = new List<TSBase>();
+
+        [NonSerialized()] private AwesomiumWrap client;
+
+        public AwesomiumWrap Client
+        {
+            get
+            {
+                if (client == null) client = new AwesomiumWrap();
+                return client;
+            }
+            set { client = value; }
+        }
+
         public List<TSBase> TaskList
         {
             get { return taskList; }

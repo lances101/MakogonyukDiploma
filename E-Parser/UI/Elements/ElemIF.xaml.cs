@@ -22,10 +22,20 @@ namespace E_Parser.UI.Elements
     public partial class ElemIF : ElemBase
     {
         public IfCompareType CurrentCompareType { get; set ;}
-        public ElemIF(TaskSession CurrentSession)
+        public ElemIF(TaskSession currentSession)
         {
             InitializeComponent();
-            Task = new TSIf(CurrentSession);
+            Task = new TSIf(currentSession);
+        }
+
+        public ElemIF()
+        {
+            InitializeComponent();
+        }
+
+        private void cmbbxIfType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
     }

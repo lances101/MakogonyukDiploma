@@ -58,9 +58,19 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="CompareType.cs" />
+    <Compile Include="Logic\ElementLogic\TSFindSingleNode.cs" />
+    <Compile Include="Logic\ElementLogic\ParameterOperation.cs" />
+    <Compile Include="Logic\ElementLogic\TSParameterTap.cs" />
     <Compile Include="Logic\ElementLogic\TSIf.cs" />
+    <Compile Include="Logic\ElementLogic\TSParameterProxy.cs" />
     <Compile Include="Logic\ElementLogic\TSWhile.cs" />
     <Compile Include="Logic\EnumerationExtension.cs" />
+    <Compile Include="UI\Elements\ElemFindSingleNode.xaml.cs">
+      <DependentUpon>ElemFindSingleNode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemParameter.xaml.cs">
+      <DependentUpon>ElemParameter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Elements\ElemIF.xaml.cs">
       <DependentUpon>ElemIF.xaml</DependentUpon>
     </Compile>
@@ -80,6 +90,14 @@
     <Compile Include="UI\SessionEditor.xaml.cs">
       <DependentUpon>SessionEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\Elements\ElemFindSingleNode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemParameter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Elements\ElemIF.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

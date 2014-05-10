@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Awesomium.Core;
+using E_Parser.UI.Elements;
 
 namespace E_Parser.Logic.ElementLogic
 {
+    [Serializable]
     public class TSLoadUrl : TSBase
     {
         public TSLoadUrl(TaskSession ts) : base(ts)
         {
             InputTypes = new List<ParameterTypes>() { ParameterTypes.String };
-            OutputTypes = new List<ParameterTypes>() { ParameterTypes.Boolean };
+            OutputType = ParameterTypes.Boolean;
+            ElemType = typeof(ElemLoadURL);
         }
 
 

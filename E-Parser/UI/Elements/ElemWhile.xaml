@@ -7,10 +7,10 @@
              mc:Ignorable="d" 
              Height="50" Width="200" MaxHeight="50" MaxWidth="200"
              Session="{Binding CurrentSession, NotifyOnTargetUpdated=True}">
-    <Border BorderBrush="LightGray" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="200" Background="#FF0080BB">
+    <Border BorderBrush="LightGray" BorderThickness="2,2,2,2" CornerRadius="10,10,10,10"  Background="#FF0080BB">
         <Grid>
-            <Label x:Name="lblElementAction" HorizontalContentAlignment="Center" Content="Session end" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.974,0.75" Height="24" Foreground="White" Width="154"/>
-            <Viewbox Height="20" Margin="164,2,0,2">
+            <Label x:Name="lblElementAction" HorizontalContentAlignment="Center" Content="Session end" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="30" Foreground="White" Width="154"/>
+            <Viewbox Height="15" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}" Checked="rbtnRunning_Checked"></RadioButton>
             </Viewbox>
         </Grid>

@@ -5,11 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:elements="clr-namespace:E_Parser.UI.Elements"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="200">
-    <Border BorderBrush="LightGray" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8"  HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="200" Background="#FF0080BB">
+             MinWidth="125" MinHeight="30" >
+    <Border BorderBrush="LightGray" BorderThickness="2,2,2,2" CornerRadius="10,10,10,10"  Background="#FF0080BB">
         <Grid>
-            <Label x:Name="lblElementAction" HorizontalContentAlignment="Center" Content="Load URL" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.974,0.75" Height="24" Foreground="White" Width="154"/>
-            <Viewbox Height="20" Margin="164,2,0,2">
+            <Label x:Name="lblElementAction" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch"
+                   Content="Load URL" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                   Height="25" Foreground="White"  />
+            <Viewbox Height="15" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
             </Viewbox>
         </Grid>

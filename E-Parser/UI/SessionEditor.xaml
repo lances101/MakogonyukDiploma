@@ -13,10 +13,14 @@
             <Button Content="LoadURL" VerticalAlignment="Top" Width="75" Click="Button_Click_4"  />
         </TreeView>
         
-        <ListBox  x:Name="SessionViewer" ItemsSource="{Binding SessionElements}" HorizontalContentAlignment="Center"  HorizontalAlignment="Left" Height="569" Margin="183,0,0,0" VerticalAlignment="Top" Width="364">
+        <ListBox  x:Name="SessionViewer" ItemsSource="{Binding SessionElements}" 
+                  HorizontalContentAlignment="Center"  HorizontalAlignment="Left" 
+                  Height="569" Margin="183,0,0,0" VerticalAlignment="Top" Width="300">
             
         </ListBox>
-        <Button Content="GO" HorizontalAlignment="Left" Margin="618,48,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <Button Content="GO" HorizontalAlignment="Left" Margin="669,48,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_5"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="627,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_6"/>
 
     </Grid>
 </Window>

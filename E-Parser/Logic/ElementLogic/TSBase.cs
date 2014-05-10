@@ -4,50 +4,70 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_Parser.UI.Elements;
 
 namespace E_Parser.Logic.ElementLogic
 {
+    [Serializable]
     public abstract class TSBase
     {
         public enum ParameterTypes
         {
-            None, Any, String, Integer, NodeList, Node, Boolean
+            None,
+            Any,
+            String,
+            Integer,
+            NodeList,
+            Node,
+            Boolean
         }
 
         public abstract string GetName { get; }
         public List<ParameterTypes> InputTypes { get; set; }
-        public List<ParameterTypes> OutputTypes { get; set; }
+        public ParameterTypes OutputType { get; set; }
         public string DirectStringInput { get; set; }
-        public TSBase NextTask { get; set; }
+        private TSBase _nextTask;
+
+        public TSBase NextTask
+        {
+            get { return _nextTask; }
+            set
+            {
+                _nextTask = value;
+                _nextTask.PreviousTask = this;
+            }
+        }
+
         protected abstract object _mainTaskMethod(object[] args);
-        protected TaskSession Session;
+        private TaskSession _session;
+        protected TSBase PreviousTask;
+        public Type ElemType { get; set; }
+
+        public TaskSession Session
+        {
+            get { return _session; }
+            set { _session = value; }
+        }
+
 
         protected TSBase(TaskSession ts)
         {
-            
-            Session = ts;
+            _session = ts;
         }
 
-        public void BindToNewSession(TaskSession ts)
-        {
-            Session = ts;
-        }
 
-        
-        public void StartTask(params object[] args)
+        public void StartTask(TSBase previous, params object[] args)
         {
-            var task = Task.Factory.StartNew(() => 
-            {
-                return _mainTaskMethod(args);
-            });
+            PreviousTask = previous;
+
+            var task = Task.Factory.StartNew(() => { return _mainTaskMethod(args); });
             task.ContinueWith(continuation => OnTaskCompleted(task.Result));
         }
+
         private void OnTaskCompleted(object result)
         {
-            if(NextTask.GetType() != typeof(TSEnd))
-                NextTask.StartTask(result);
+            if (NextTask.GetType() != typeof (TSEnd))
+                NextTask.StartTask(this, result);
         }
-
-       
     }
 }

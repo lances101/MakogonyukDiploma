@@ -7,12 +7,15 @@ using HtmlAgilityPack;
 
 namespace E_Parser.Logic.ElementLogic
 {
+    [Serializable]
     public class TSFindNodes : TSBase
     {
         public TSFindNodes(TaskSession ts) : base(ts)
         {
             InputTypes = new List<ParameterTypes>() { ParameterTypes.String, ParameterTypes.Node};
-            OutputTypes = new List<ParameterTypes>() { ParameterTypes.NodeList};
+            OutputType = ParameterTypes.None;
+            
+
         }
 
         public override string GetName

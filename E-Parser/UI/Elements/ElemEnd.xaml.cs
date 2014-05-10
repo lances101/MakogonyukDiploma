@@ -26,10 +26,14 @@ namespace E_Parser.UI.Elements
             InitializeComponent();
             Task = new TSEnd(CurrentSession);
         }
-        private void rbtnRunning_Checked(object sender, RoutedEventArgs e)
+
+        public ElemEnd(TaskSession curreSession, TSBase task) : base(curreSession, task)
         {
-            Console.Write("yo");
+            InitializeComponent();
+            
+            Task = task;
         }
+
 
     }
 }

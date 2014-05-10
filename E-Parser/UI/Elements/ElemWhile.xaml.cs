@@ -21,7 +21,7 @@ namespace E_Parser.UI.Elements
 
     public partial class ElemWhile : ElemBase
     {
-        public ElemWhile(TaskSession CurrentSession)
+        public ElemWhile(TaskSession CurrentSession) 
         {
             InitializeComponent();
             

@@ -11,10 +11,10 @@
              Height="300" Width="400" MaxHeight="500" MaxWidth="400"
                    DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Border BorderBrush="LightGray" BorderThickness="3,3,3,3" CornerRadius="8,8,8,8" Background="#FF0080BB">
+    <Border BorderBrush="LightGray"  BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" Background="#FF0080BB">
         <Grid>
-            <Label HorizontalContentAlignment="Center" Content="If Comparer" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.974,0.75" Height="24" Foreground="White" Width="154"/>
-            <Viewbox Height="20" HorizontalAlignment="Right">
+            <Label HorizontalContentAlignment="Center" Content="If Comparer" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Height="30" Foreground="White" />
+            <Viewbox Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" >
                 <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
             </Viewbox>
             <ComboBox x:Name="cmbbxIfType" 
@@ -22,9 +22,11 @@
                       DisplayMemberPath="Description"
                       SelectedValue="{Binding CurrentCompareType}"
                       SelectedValuePath="Value"
-                      HorizontalAlignment="Left" Margin="160,60,0,0" VerticalAlignment="Top" Width="81"/>
-            <ListBox HorizontalAlignment="Left"  Margin="10,100,0,0" VerticalAlignment="Stretch" Width="358"/>
-            
+                      HorizontalAlignment="Left" Margin="165,56,0,0" VerticalAlignment="Top" Width="64" SelectionChanged="cmbbxIfType_SelectionChanged"/>
+            <ListBox HorizontalAlignment="Stretch"  Margin="20,100,20,10" VerticalAlignment="Stretch"/>
+            <elements:ElemParameter HorizontalAlignment="Left" Margin="20,34,0,0" VerticalAlignment="Top"/>
+            <elements:ElemParameter HorizontalAlignment="Left" Margin="234,34,0,0" VerticalAlignment="Top"/>
+
         </Grid>
     </Border>
 </elements:ElemBase>

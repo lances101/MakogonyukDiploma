@@ -17,15 +17,24 @@ using E_Parser.Logic.ElementLogic;
 namespace E_Parser.UI.Elements
 {
     /// <summary>
-    /// Interaction logic for ElemLoadURL.xaml
+    /// Interaction logic for ElemTextInput.xaml
     /// </summary>
-    public partial class ElemLoadURL : ElemBase
+    public partial class ElemFindSingleNode : ElemBase
     {
-        public ElemLoadURL(TaskSession ts) 
+        public ElemFindSingleNode(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSLoadUrl(ts);
-            
+            Task = new TSTextInput(ts);
+        }
+
+        private void tbxUrl_TextChanged(object sender, TextChangedEventArgs e)
+        {       
+            Task.DirectStringInput = tbxUrl.Text;
+        }
+
+        public override void NextElementReaction(ElemBase next)
+        {
+            lblTitle.Content = "Text Input for " + next.Task.GetName;
         }
     }
 }
