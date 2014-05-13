@@ -1,4 +1,4 @@
-﻿<elements:ElemBase x:Class="E_Parser.UI.Elements.ElemIF"
+﻿<elements:ElemBase x:Class="E_Parser.UI.Elements.ElemIfStart"
              xmlns:elements="clr-namespace:E_Parser.UI.Elements"
              xmlns:my="clr-namespace:E_Parser.Logic"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,24 +8,21 @@
              xmlns:eParser="clr-namespace:E_Parser"
              xmlns:elementLogic="clr-namespace:E_Parser.Logic.ElementLogic"
              mc:Ignorable="d" 
-             Height="300" Width="400" MaxHeight="500" MaxWidth="400"
-                   DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             Height="158" Width="400" MaxHeight="150" MaxWidth="400"
+             >
 
     <Border BorderBrush="LightGray"  BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" Background="#FF0080BB">
         <Grid>
-            <Label HorizontalContentAlignment="Center" Content="If Comparer" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Height="30" Foreground="White" />
-            <Viewbox Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" >
-                <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
-            </Viewbox>
+            <Label HorizontalContentAlignment="Center" Content="If Comparer (Start)" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Height="30" Foreground="White" />
+            
             <ComboBox x:Name="cmbbxIfType" 
                       ItemsSource="{Binding Source={my:Enumeration {x:Type elementLogic:IfCompareType}}}"
                       DisplayMemberPath="Description"
                       SelectedValue="{Binding CurrentCompareType}"
                       SelectedValuePath="Value"
-                      HorizontalAlignment="Left" Margin="165,56,0,0" VerticalAlignment="Top" Width="64" SelectionChanged="cmbbxIfType_SelectionChanged"/>
-            <ListBox HorizontalAlignment="Stretch"  Margin="20,100,20,10" VerticalAlignment="Stretch"/>
-            <elements:ElemParameter HorizontalAlignment="Left" Margin="20,34,0,0" VerticalAlignment="Top"/>
-            <elements:ElemParameter HorizontalAlignment="Left" Margin="234,34,0,0" VerticalAlignment="Top"/>
+                      HorizontalAlignment="Left" Margin="165,49,0,0" VerticalAlignment="Top" Width="64" SelectionChanged="cmbbxIfType_SelectionChanged"/>
+            <elements:ElemParameterTap HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top"/>
+            <elements:ElemParameterTap HorizontalAlignment="Left" Margin="234,30,0,0" VerticalAlignment="Top"/>
 
         </Grid>
     </Border>

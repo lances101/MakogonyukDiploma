@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Awesomium.Core;
+using E_Parser.UI;
 using HtmlAgilityPack;
 namespace E_Parser.Logic
 {
@@ -29,7 +30,7 @@ namespace E_Parser.Logic
             }
             catch (Exception e)
             {
-                Console.WriteLine("[XPath Error] {0}" + e.Message);
+                SessionEditor.Log("[XPath Error] {0}" + e.Message);
             }
             return null;
         }
@@ -41,7 +42,7 @@ namespace E_Parser.Logic
             }
             catch (Exception e)
             {
-                Console.WriteLine("[XPath Error] {0}" + e.Message);
+                SessionEditor.Log("[XPath Error] {0}" + e.Message);
             }
             return null;
         }

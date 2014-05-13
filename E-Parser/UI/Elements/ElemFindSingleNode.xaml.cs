@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using E_Parser.Logic.ElementLogic;
+using TheE_Parser;
 
 namespace E_Parser.UI.Elements
 {
@@ -24,17 +26,41 @@ namespace E_Parser.UI.Elements
         public ElemFindSingleNode(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSTextInput(ts);
+            Task = new TSFindSingleNode(ts);
         }
-
-        private void tbxUrl_TextChanged(object sender, TextChangedEventArgs e)
-        {       
-            Task.DirectStringInput = tbxUrl.Text;
-        }
-
-        public override void NextElementReaction(ElemBase next)
+        public ElemFindSingleNode(TSBase ts)
         {
-            lblTitle.Content = "Text Input for " + next.Task.GetName;
+            InitializeComponent();
+            Task = ts;
         }
+
+        public ElemFindSingleNode()
+        {
+            
+        }
+        
+        private void Target_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+           
+                int ind = Session.GetTaskIndex(Task);
+                var prevNode = Session.FunctionalElements.Last(o => o.GetType() == typeof(TSLoadUrl)  && o.Session.GetTaskIndex(o) < ind);
+                EPathExtractor diagWin = new EPathExtractor(prevNode.DirectStringInput);
+           
+                
+            try
+            {
+                
+                if (diagWin.ShowDialog() == true)
+                {
+                    tbxUrl.Text = diagWin.XPathResult;
+                }
+            }
+            catch (Exception err)
+            {
+                
+            }
+
+        }
+
     }
 }

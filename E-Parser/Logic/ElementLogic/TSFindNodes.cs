@@ -12,8 +12,7 @@ namespace E_Parser.Logic.ElementLogic
     {
         public TSFindNodes(TaskSession ts) : base(ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.String, ParameterTypes.Node};
-            OutputType = ParameterTypes.None;
+           
             
 
         }
@@ -34,6 +33,12 @@ namespace E_Parser.Logic.ElementLogic
                 collection = Session.Client.HAP.GetMultipleElements(args[0] as string);    
             }
             return collection;
+        }
+
+        protected override void StaticTypes(TaskSession ts)
+        {
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.String, ParameterTypes.Node };
+            OutputType = ParameterTypes.None;
         }
     }
 }

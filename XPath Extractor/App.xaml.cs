@@ -11,5 +11,6 @@ namespace TheE_Parser
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

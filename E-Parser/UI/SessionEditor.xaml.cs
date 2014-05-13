@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using E_Parser.Logic.ElementLogic;
 using E_Parser.UI.Elements;
+using TheE_Parser;
 
 namespace E_Parser.UI
 {
@@ -23,15 +24,38 @@ namespace E_Parser.UI
     /// </summary>
     public partial class SessionEditor : Window
     {
+        private static RichTextBox rtbxLogBox;
         private TaskSession _session;
-        private List<ElemBase> sessionElements = new List<ElemBase>();
-
-        public List<ElemBase> SessionElements
+        private List<ElemBase> _visualElements = new List<ElemBase>();
+        public List<ElemBase> VisualElements
         {
-            get { return sessionElements; }
-            set { sessionElements = value; }
+            get { return _visualElements; }
+            set { _visualElements = value; }
         }
 
+        public static void Log(string message)
+        {
+            if (rtbxLogBox == null) return;
+            try
+            {
+                rtbxLogBox.AppendText(message + "\n");
+            }
+            catch (Exception e)
+            {
+                rtbxLogBox.Dispatcher.Invoke(() => Log(message));
+            }
+
+        }
+
+        public static void Log(string format, params object[] args)
+        {
+            Log(String.Format(format, args));
+        }
+
+        public static void Log(object obj)
+        {
+            Log(obj.ToString());
+        }
         public void LoadSession()
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -39,10 +63,13 @@ namespace E_Parser.UI
             {
                 CurrentSession = (TaskSession) bf.Deserialize(fs);
             }
-            SessionElements.Clear();
-            foreach (var e in CurrentSession.TaskList)
+            CurrentSession.VisualElements = VisualElements;
+            CurrentSession.Client = new AwesomiumWrap();
+            VisualElements.Clear();
+            foreach (var e in CurrentSession.FunctionalElements)
             {
-                RestoreTask(e);
+                SessionEditor.Log(e.GetName);
+                CurrentSession.RestoreTask(e);
             }
 
         }
@@ -57,9 +84,13 @@ namespace E_Parser.UI
 
         public SessionEditor()
         {
-            _session = new TaskSession();
+            _session = new TaskSession(VisualElements);
             InitializeComponent();
-            AddNewTask(typeof(ElemStart));
+            rtbxLogBox = rtbxLog;
+        }
+
+        public void TreeViewFiller()
+        {
         }
 
         public TaskSession CurrentSession
@@ -67,82 +98,103 @@ namespace E_Parser.UI
             get { return _session; }
             set
             {
-                
+                _session = value;
             }
         }
 
-        private void AddNewTask(Type elem)
+        private void OnTreeItem_Click(object sender, MouseButtonEventArgs args)
         {
-            ElemBase be = Activator.CreateInstance(elem, CurrentSession) as ElemBase;
-            if (SessionElements.Count > 0)
+            if (sender is TreeViewItem)
             {
-                if (be is ElemStart) return;
-                if (SessionElements.Last().TryAddNewElement(be))
+                if (ElementTreeView.SelectedItem == null) return;
+                switch ((ElementTreeView.SelectedItem as TreeViewItem).Name.ToString())
                 {
-                    CurrentSession.TaskList.Add(be.Task);
-                    SessionElements.Add(be);
-                    SessionViewer.Items.Refresh();
+                    //Debug
+                    case "tElemDebugMessage":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemDebugMessage));
+                        break;
+                            
+                    //routine specific
+                    case "tElemStart":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemStart));
+                        break;
+                    case "tElemEnd":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemEnd));
+                        break;
+
+                    //variable control
+                    case "tElemTextInput":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemTextInput));
+                        break;
+                    case "tElemStoreSingleVariable":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemStoreSingleVariable));
+                        break;
+
+
+                    //web control
+                    case "tElemLoadURL":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof (ElemLoadURL));
+                        break;
+
+
+                    //parser control
+                    case "tElemFindSingleNode":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase,typeof (ElemFindSingleNode));
+                        break;
+
                 }
+                SessionViewer.Items.Refresh();
+         
             }
-            else
-            {
-                if (be is ElemStart)
-                {
-                    CurrentSession.TaskList.Add(be.Task);
-                    SessionElements.Add(be);
-                    SessionViewer.Items.Refresh();
-                }
-            }
+
         }
 
-        private void RestoreTask(TSBase task)
+        private void AddNewTask(ElemBase origin, Type newElem)
         {
-            ElemBase be = Activator.CreateInstance(task.ElemType, task.Session) as ElemBase;
-            if (SessionElements.Count == 0)
-            {
-                SessionElements.Add(be);
-            }
-            else if (SessionElements.Last().TryAddNewElement(be))
-            {
-                SessionElements.Add(be);
-            }
-            SessionViewer.Items.Refresh();
+            var res = CurrentSession.AddNewTask(origin, newElem);
+            if (res != null) SessionViewer.SelectedItem = res;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddNewTask(typeof(ElemStart));
+            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemStart));
+            SessionViewer.Items.Refresh();
             
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AddNewTask(typeof(ElemTextInput));
+            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemTextInput));
+            SessionViewer.Items.Refresh();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            AddNewTask(typeof(ElemLoadURL));
+            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemLoadURL));
+            SessionViewer.Items.Refresh();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            CurrentSession.StartSession();
-        }
+       
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            AddNewTask(typeof(ElemEnd));
+            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemEnd));
+            SessionViewer.Items.Refresh();
         }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void StartSession_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentSession.StartSession();
+        }
+        private void SaveSession_Click(object sender, RoutedEventArgs e)
         {
             SaveSession();
+            SessionViewer.Items.Refresh();
         }
 
-        private void Button_Click_6(object sender, RoutedEventArgs e)
+        private void LoadSession_Click(object sender, RoutedEventArgs e)
         {
             LoadSession();
+            SessionViewer.Items.Refresh();
         }
 
        

@@ -13,9 +13,7 @@ namespace E_Parser.Logic.ElementLogic
         
         public TSEnd(TaskSession ts) : base(ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
-            OutputType = ParameterTypes.None ;
-            ElemType = typeof (ElemEnd);
+            
         }
 
         public override string GetName
@@ -27,6 +25,13 @@ namespace E_Parser.Logic.ElementLogic
         {
             Session.EndSession();
             return null;
+        }
+
+        protected override void StaticTypes(TaskSession ts)
+        {
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
+            OutputType = ParameterTypes.None;
+            ElemType = typeof(ElemEnd);
         }
     }
 }

@@ -27,6 +27,7 @@ function getXPath(element) {
         currentNode = currentNode.parentElement;
     }
     var xpath = "/" + path.reverse().join('/');
+    xpath = "." + xpath;
     return xpath;
 }
 function getNode(node) {

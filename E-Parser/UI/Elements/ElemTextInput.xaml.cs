@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,30 +13,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using E_Parser.Logic.ElementLogic;
-using E_Parser.UI.Elements;
 
 namespace E_Parser.UI.Elements
 {
-
-    public partial class ElemEnd : ElemBase
+    /// <summary>
+    /// Interaction logic for ElemTextInput.xaml
+    /// </summary>
+    public partial class ElemTextInput : ElemBase
     {
-        public ElemEnd(TaskSession CurrentSession)
+        public ElemTextInput()
+        {}
+        public ElemTextInput(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSEnd(CurrentSession);
+            Task = new TSTextInput(ts);
         }
-
-        public ElemEnd(TSBase ts)
+        public ElemTextInput(TSBase ts)
         {
             InitializeComponent();
             Task = ts;
         }
 
-        public ElemEnd()
-        {
-            
+        private void tbxUrl_TextChanged(object sender, TextChangedEventArgs e)
+        {       
+            //Task.DirectStringInput = tbxUrl.Text;
         }
 
-
+        public override void NextElementReaction(ElemBase next)
+        {
+            lblTitle.Content = "Text Input for " + next.Task.GetName;
+        }
     }
 }

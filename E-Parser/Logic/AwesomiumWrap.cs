@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using E_Parser.Logic;
+using E_Parser.UI;
 
 namespace TheE_Parser
 {
-    public delegate void JSCallbackHandler(object source, JSCallbackArgs e);
+    public delegate void JSCallbackHandler(object sender, JSCallbackArgs e);
     public class JSCallbackArgs : EventArgs
     {
     	private string _methodName;
@@ -41,7 +42,7 @@ namespace TheE_Parser
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("[JS Callback] Error: " + e.Message);
+                    SessionEditor.Log("[JS Callback] Error: " + e.Message);
                 }
                 return "CALLBACK WITH NO ARGUMENTS";
             }
@@ -53,9 +54,11 @@ namespace TheE_Parser
     {
         public AwesomiumWrap()
         {
-            _view = WebCore.CreateWebView(1024, 640);
-            _view.DocumentReady += ViewDocumentReady;
+
+            _view =  WebCore.CreateWebView(1024, 640);
+            _view.LoadingFrameComplete += ViewDocumentReady;
             HAP = new HAPWrap(_view);
+
         }
         public event JSCallbackHandler Callback;
         public HAPWrap HAP;
@@ -67,11 +70,11 @@ namespace TheE_Parser
             set
             {
                 _view = value;
-                _view.DocumentReady += ViewDocumentReady;
+                _view.LoadingFrameComplete += ViewDocumentReady;
             }
         }
 
-
+        private bool isLoading = false;
         public bool LoadUrl(string url)
         {
             if (View.InvokeRequired)
@@ -79,18 +82,20 @@ namespace TheE_Parser
             try
             {
                 var uri = new Uri(url);
+                isLoading = true;
                 View.Source = uri;
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("[URL Validator] " + e.Message);
+                SessionEditor.Log("[URL Validator] " + e.Message);
             }
             return false;
         }
 
         public bool IsLoading()
         {
+            return isLoading;
             if (View.InvokeRequired)
             {
                 return (bool)InvokeWithoutArguments(new Func<bool>(IsLoading));
@@ -104,7 +109,7 @@ namespace TheE_Parser
                 InvokeWithoutArguments(new Action(RenderToPng));
                 return;
             }
-            Console.WriteLine("SAVING " + ((BitmapSurface) View.Surface).SaveToPNG(@"F:\Debug\debug.png"));
+            SessionEditor.Log("SAVING " + ((BitmapSurface) View.Surface).SaveToPNG(@"F:\Debug\debug.png"));
             Process.Start(@"F:\Debug\debug.png");
         }
         public bool ClickElement(string xpath)
@@ -132,7 +137,24 @@ namespace TheE_Parser
         {
             return View.Invoke(method, null);
         }
-        private void ViewDocumentReady(object sender, Awesomium.Core.UrlEventArgs e)
+        private void ViewDocumentReady(object sender, FrameEventArgs e)
+        {
+            if (View == null || !View.IsLive)
+                return;
+            if (e.IsMainFrame)
+            {
+
+                if (View.IsDocumentReady == true)
+                {
+
+                    isLoading = false;
+                    LoadingActuallyCompleted();
+                }
+            }
+
+        }
+
+        private void LoadingActuallyCompleted()
         {
             InjectJQuery();
             BindMethods();

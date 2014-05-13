@@ -4,23 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:elements="clr-namespace:E_Parser.UI.Elements"
-             mc:Ignorable="d" d:DesignHeight="60" d:DesignWidth="125" MaxWidth="270" MinHeight="60"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             mc:Ignorable="d" d:DesignHeight="60" d:DesignWidth="150" MaxWidth="270" MinHeight="60"     
+             >
+    <elements:ElemBase.Resources>
+        <BitmapImage x:Key="TargetIcon" UriSource="../../Resources/icon_target.png" />
+    </elements:ElemBase.Resources>
     <Border BorderBrush="LightGray" BorderThickness="2,2,2,2" CornerRadius="10,10,10,10"  
             HorizontalAlignment="Left" Background="#FF0080BB">
         <Grid>
             <Grid>
                 <Label x:Name="lblTitle" HorizontalContentAlignment="Center" 
-                       Content="Text Input for " HorizontalAlignment="Stretch" 
-                       VerticalAlignment="Top" Height="25" Foreground="White" Margin="10,0,26,0"/>
-                <TextBox x:Name="tbxUrl" Text ="{Binding Path=Task.DirectStringInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                       Content="Find Single Node" HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Top" Height="25" Foreground="White" Margin="5,0,15,0"/>
+                <TextBox x:Name="tbxUrl" Text ="{Binding Path=(elements:ElemBase.Task).DirectStringInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          HorizontalAlignment="Stretch" Height="25" 
-                         Margin="10,25,30,0" TextWrapping="Wrap" VerticalAlignment="Top"  TextChanged="tbxUrl_TextChanged"/>
+                         Margin="10,25, 10,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+                <Image  Source="{StaticResource TargetIcon}"  HorizontalAlignment="Right" Height="20"  VerticalAlignment="Bottom" Width="20" MouseLeftButtonDown="Target_DoubleClick" Margin="0,0,0,36"/>
             </Grid>
 
-            <Viewbox Height="15" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <RadioButton x:Name="rbtnRunning" IsChecked="{Binding Source=IsRunning, Mode=OneWay}"></RadioButton>
-            </Viewbox>
 
         </Grid>
     </Border>

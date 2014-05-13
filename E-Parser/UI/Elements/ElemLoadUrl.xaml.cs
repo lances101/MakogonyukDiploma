@@ -21,11 +21,19 @@ namespace E_Parser.UI.Elements
     /// </summary>
     public partial class ElemLoadURL : ElemBase
     {
+        public ElemLoadURL()
+        {
+            
+        }
         public ElemLoadURL(TaskSession ts) 
         {
             InitializeComponent();
             Task = new TSLoadUrl(ts);
-            
+        }
+        public ElemLoadURL(TSBase ts)
+        {
+            InitializeComponent();
+            Task = ts;
         }
     }
 }

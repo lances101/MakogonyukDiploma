@@ -12,11 +12,14 @@ namespace E_Parser.Logic.ElementLogic
     {
         public TSTextInput(TaskSession ts) : base(ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
-            OutputType = ParameterTypes.String;
-            ElemType = typeof(ElemTextInput);
+            
         }
 
+        public override string DirectStringInput
+        {
+            get { return Session.GetNextTask(this).DirectStringInput; }
+            set { Session.GetNextTask(this).DirectStringInput = value; }
+        }
 
         public override string GetName
         {
@@ -26,6 +29,13 @@ namespace E_Parser.Logic.ElementLogic
         protected override object _mainTaskMethod(object[] args)
         {
             return DirectStringInput;
+        }
+
+        protected override void StaticTypes(TaskSession ts)
+        {
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
+            OutputType = ParameterTypes.String;
+            ElemType = typeof(ElemTextInput);
         }
     }
 }

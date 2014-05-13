@@ -21,11 +21,20 @@ namespace E_Parser.UI.Elements
 
     public partial class ElemWhile : ElemBase
     {
+        public ElemWhile()
+        {}
         public ElemWhile(TaskSession CurrentSession) 
         {
             InitializeComponent();
-            
+            Task = new TSWhile(CurrentSession);
         }
+
+        public ElemWhile(TSBase ts)
+        {
+            InitializeComponent();
+            Task = ts;
+        }
+
         private void rbtnRunning_Checked(object sender, RoutedEventArgs e)
         {
             

@@ -25,13 +25,11 @@ namespace E_Parser
         public MainWindow()
         {
             InitializeComponent();
+            //this.Hide();
+            Button_Click_1(null, null);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            TaskSession ts = new TaskSession();
-            ts.StartSession();
-        }
+      
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

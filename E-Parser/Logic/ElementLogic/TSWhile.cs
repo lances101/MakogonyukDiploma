@@ -12,7 +12,7 @@ namespace E_Parser.Logic.ElementLogic
     {
         public TSWhile(TaskSession ts) : base(ts)
         {
-            ElemType = typeof(ElemWhile);
+            
         }
 
         public override string GetName
@@ -23,6 +23,12 @@ namespace E_Parser.Logic.ElementLogic
         protected override object _mainTaskMethod(object[] args)
         {
             return null;
+        }
+
+        protected override void StaticTypes(TaskSession ts)
+        {
+            ElemType = typeof(ElemWhile);
+            throw new NotImplementedException();
         }
     }
 }

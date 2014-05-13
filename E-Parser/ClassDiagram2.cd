@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="E_Parser.App" Collapsed="true">
+    <Position X="30.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.CompareType" Collapsed="true">
+    <Position X="33.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CompareType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.MainWindow" Collapsed="true">
+    <Position X="33.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheE_Parser.JSCallbackArgs" Collapsed="true">
+    <Position X="32" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAQAAAAQA=</HashCode>
+      <FileName>Logic\AwesomiumWrap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TheE_Parser.AwesomiumWrap" Collapsed="true">
+    <Position X="32" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgBAAACIAAAAAAiQAAAAIAAABAAAIACAAAAYAQBI=</HashCode>
+      <FileName>Logic\AwesomiumWrap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.ParameterOperation" Collapsed="true">
+    <Position X="35.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\ElementLogic\ParameterOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TaskSession" Collapsed="true">
+    <Position X="32" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACADAAEAAiAwEgAACBAAAAABACAAAAAAAIAAigIIAQ=</HashCode>
+      <FileName>Logic\ElementLogic\TaskSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSAddNewItemType" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSAddNewItemType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TaskEndEventArgs" Collapsed="true">
+    <Position X="30.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Logic\ElementLogic\TSBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSBase" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAIAAAIAAAAQQAAAIIAQIAICIAEIAAAECAAAAQABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSDebugMessage" Collapsed="true">
+    <Position X="21" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSDebugMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSEnd" Collapsed="true">
+    <Position X="25.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSEnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSFindNodes" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSFindNodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSFindSingleNode" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSFindSingleNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSIfEnd" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACIAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSIfEnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSIfStart" Collapsed="true">
+    <Position X="18.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACIAAICAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSIfStart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSLoadUrl" Collapsed="true">
+    <Position X="23.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSLoadURL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSParameterTap" Collapsed="true">
+    <Position X="27.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAgAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSParameterTap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSStart" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSStart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSTextInput" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSTextInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSStoreSingleVariable" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSStoreSingleVariable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ElementLogic.TSWhile" Collapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSWhile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.EnumerationExtension" Collapsed="true">
+    <Position X="35.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAoAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Logic\EnumerationExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.HAPWrap" Collapsed="true">
+    <Position X="30.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAACAAAAAAAAAAAAAAAABAAACAgAAAAAAAAA=</HashCode>
+      <FileName>Logic\HAPWrap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Logic.ParsedItem" Collapsed="true">
+    <Position X="30.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAggA=</HashCode>
+      <FileName>Logic\ParsedItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Properties.Resources" Collapsed="true">
+    <Position X="32" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAgAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.Properties.Settings" Collapsed="true">
+    <Position X="35.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemBase" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAgAQAAAAAAQACAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemDebugMessage" Collapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemDebugMessage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemEnd" Collapsed="true">
+    <Position X="11.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemEnd.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemFindSingleNode" Collapsed="true">
+    <Position X="16.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>UI\Elements\ElemFindSingleNode.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemIfEnd" Collapsed="true">
+    <Position X="20.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>UI\Elements\ElemIfEnd.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemIfStart" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>UI\Elements\ElemIfStart.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemLoadURL" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemLoadURL.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemParameterTap" Collapsed="true">
+    <Position X="5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemParameterTap.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemStart" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemStart.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemTextInput" Collapsed="true">
+    <Position X="14" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemTextInput.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemStoreSingleVariable" Collapsed="true">
+    <Position X="18.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemStoreSingleVariable.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.Elements.ElemWhile" Collapsed="true">
+    <Position X="23" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Elements\ElemWhile.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Parser.UI.SessionEditor" Collapsed="true">
+    <Position X="33.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAgAAAABAAgAAQAAACEABAgAAAEoAAABCAAIAIg=</HashCode>
+      <FileName>UI\SessionEditor.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="E_Parser.Logic.ElementLogic.IfCompareType" Collapsed="true">
+    <Position X="30.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEEAACAAAAAAAgAAAAAAAAAAAAAAAAAIAABQAAAE=</HashCode>
+      <FileName>Logic\ElementLogic\TSIfStart.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="TheE_Parser.JSCallbackHandler" Collapsed="true">
+    <Position X="30.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\AwesomiumWrap.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="E_Parser.Logic.ElementLogic.TaskEndedHandler" Collapsed="true">
+    <Position X="32" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\ElementLogic\TSBase.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

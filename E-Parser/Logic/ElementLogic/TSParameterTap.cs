@@ -12,8 +12,7 @@ namespace E_Parser.Logic.ElementLogic
     {
         public TSParameterTap(TaskSession ts) : base(ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
-            OutputType = ParameterTypes.Any;
+
         }
 
         public override string GetName
@@ -21,26 +20,41 @@ namespace E_Parser.Logic.ElementLogic
             get { return "ParameterTap"; }
         }
 
+        public Type DetermineType()
+        {
+            return null;
+        }
         protected override object _mainTaskMethod(object[] args)
         {
-            switch (PreviousTask.OutputType)
+            switch (args[0].GetType().Name.ToString())
             {
-                case ParameterTypes.None:
+                case null:
                     break;
-                case ParameterTypes.String:
-                    
+                case "String":
+
                     break;
-                case ParameterTypes.Integer:
+                case "Integer":
+
                     break;
-                case ParameterTypes.NodeList:
+                case "HtmlNodeCollection":
+
                     break;
-                case ParameterTypes.Node:
+                case "HtmlNode":
+
                     break;
-                case ParameterTypes.Boolean:
+                case "Boolean":
+
                     break;
             }
 
             return null;
+        }
+
+        protected override void StaticTypes(TaskSession ts)
+        {
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
+            OutputType = ParameterTypes.Any;
+            throw new NotImplementedException();
         }
     }
 }

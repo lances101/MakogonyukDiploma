@@ -16,14 +16,22 @@ using Awesomium.Core;
 namespace TheE_Parser
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EPathExtractor.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EPathExtractor : Window
     {
+        public string XPathResult { get; set; }
+        private string IncomingURL; 
         AwesomiumBrowserTools awesomeTools = new AwesomiumBrowserTools();
         HAPTools hapTools;
-        public MainWindow()
+        public EPathExtractor()
         {
+            InitializeComponent();
+        }
+
+        public EPathExtractor(string url)
+        {
+            IncomingURL = url;
             InitializeComponent();
         }
 
@@ -34,7 +42,8 @@ namespace TheE_Parser
             awesomeTools.Client.DocumentReady += Client_DocumentReady;
             awesomeTools.Callback += JSCallback_Handler;
             hapTools.displayTools.Callback += JSCallback_Handler;
-            awesomeTools.Client.Source = new Uri("http://google.com/");
+            
+            awesomeTools.Client.Source = new Uri(IncomingURL ?? "http://google.com/");
         }
 
         void Client_DocumentReady(object sender, UrlEventArgs e)
@@ -50,7 +59,7 @@ namespace TheE_Parser
         private void Window_Closed(object sender, EventArgs e)
         {
             awwebPicker.Dispose();
-            WebCore.Shutdown();
+            Console.WriteLine("OLOLO");
         }
 
         private void tbxUrl_KeyDown(object sender, KeyEventArgs e)
@@ -74,7 +83,7 @@ namespace TheE_Parser
             if (count != -1)
             {
                 cmbbxXPathIndex.Visibility = Visibility.Visible;
-               XPathIndicatorImage.Source = new BitmapImage(new Uri("/Resources/icon_bad2.png", UriKind.Relative));
+                XPathIndicatorImage.Source = new BitmapImage(new Uri("/Resources/icon_bad2.png", UriKind.Relative));
                 cmbbxXPathIndex.Items.Clear();
                 for (int i = 0; i < count; i++)
                     cmbbxXPathIndex.Items.Add(i + 1);
@@ -102,6 +111,12 @@ namespace TheE_Parser
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             awesomeTools.Client.GoBack();
+        }
+
+        private void ReturnToParser_Click(object sender, RoutedEventArgs e)
+        {
+            XPathResult = tbxXPath.Text;
+            this.DialogResult = true;
         }
 
        

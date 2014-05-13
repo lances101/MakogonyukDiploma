@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,28 +13,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using E_Parser.Logic.ElementLogic;
-using E_Parser.UI.Elements;
 
 namespace E_Parser.UI.Elements
 {
-
-    public partial class ElemStart : ElemBase
+    /// <summary>
+    /// Interaction logic for ElemTextInput.xaml
+    /// </summary>
+    public partial class ElemStoreSingleVariable : ElemBase
     {
-        public ElemStart()
-        {
-        }
-
-        public ElemStart(TaskSession CurrentSession)
+        public ElemStoreSingleVariable()
+        {}
+        public ElemStoreSingleVariable(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSStart(CurrentSession);
+            Task = new TSStoreSingleVariable(ts);
         }
-
-        public ElemStart(TSBase ts)
+        public ElemStoreSingleVariable(TSBase ts)
         {
             InitializeComponent();
             Task = ts;
+            
         }
 
+        public override void NextElementReaction(ElemBase next)
+        {
+            
+        }
+
+      
     }
 }

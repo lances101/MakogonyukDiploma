@@ -14,9 +14,7 @@ namespace E_Parser.Logic.ElementLogic
     {
         public TSLoadUrl(TaskSession ts) : base(ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.String };
-            OutputType = ParameterTypes.Boolean;
-            ElemType = typeof(ElemLoadURL);
+            
         }
 
 
@@ -27,7 +25,7 @@ namespace E_Parser.Logic.ElementLogic
 
         protected override object _mainTaskMethod(object[] args)
         {
-            if (!Session.Client.LoadUrl(args[0] as string)) return false;
+            if (!Session.Client.LoadUrl(String.IsNullOrEmpty(DirectStringInput)? args[0] as string : DirectStringInput)) return false;
             while (Session.Client.IsLoading())
             {
                 
@@ -36,7 +34,11 @@ namespace E_Parser.Logic.ElementLogic
             return true;
         }
 
-    
-        
+        protected override void StaticTypes(TaskSession ts)
+        {
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.String };
+            OutputType = ParameterTypes.Boolean;
+            ElemType = typeof(ElemLoadURL);
+        }
     }
 }

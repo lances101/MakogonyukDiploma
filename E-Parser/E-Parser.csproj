@@ -58,21 +58,38 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="CompareType.cs" />
+    <Compile Include="Logic\ElementLogic\TSLoadSingleVariable.cs" />
+    <Compile Include="Logic\ElementLogic\TSDebugMessage.cs" />
+    <Compile Include="Logic\ElementLogic\TSIfEnd.cs" />
+    <Compile Include="Logic\ElementLogic\TSAddNewItemType.cs" />
     <Compile Include="Logic\ElementLogic\TSFindSingleNode.cs" />
     <Compile Include="Logic\ElementLogic\ParameterOperation.cs" />
     <Compile Include="Logic\ElementLogic\TSParameterTap.cs" />
-    <Compile Include="Logic\ElementLogic\TSIf.cs" />
-    <Compile Include="Logic\ElementLogic\TSParameterProxy.cs" />
+    <Compile Include="Logic\ElementLogic\TSIfStart.cs" />
+    <Compile Include="Logic\ElementLogic\TSStoreSingleVariable.cs" />
     <Compile Include="Logic\ElementLogic\TSWhile.cs" />
     <Compile Include="Logic\EnumerationExtension.cs" />
+    <Compile Include="Logic\ParsedItem.cs" />
+    <Compile Include="UI\Elements\ElemLoadSingleVariable.xaml.cs">
+      <DependentUpon>ElemLoadSingleVariable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemDebugMessage.xaml.cs">
+      <DependentUpon>ElemDebugMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemIfEnd.xaml.cs">
+      <DependentUpon>ElemIfEnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemStoreSingleVariable.xaml.cs">
+      <DependentUpon>ElemStoreSingleVariable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Elements\ElemFindSingleNode.xaml.cs">
       <DependentUpon>ElemFindSingleNode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Elements\ElemParameter.xaml.cs">
-      <DependentUpon>ElemParameter.xaml</DependentUpon>
+    <Compile Include="UI\Elements\ElemParameterTap.xaml.cs">
+      <DependentUpon>ElemParameterTap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Elements\ElemIF.xaml.cs">
-      <DependentUpon>ElemIF.xaml</DependentUpon>
+    <Compile Include="UI\Elements\ElemIfStart.xaml.cs">
+      <DependentUpon>ElemIfStart.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Elements\ElemWhile.xaml.cs">
       <DependentUpon>ElemWhile.xaml</DependentUpon>
@@ -90,15 +107,31 @@
     <Compile Include="UI\SessionEditor.xaml.cs">
       <DependentUpon>SessionEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\Elements\ElemLoadSingleVariable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemDebugMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemIfEnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemStoreSingleVariable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Elements\ElemFindSingleNode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Elements\ElemParameter.xaml">
+    <Page Include="UI\Elements\ElemParameterTap.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Elements\ElemIF.xaml">
+    <Page Include="UI\Elements\ElemIfStart.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -169,6 +202,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -184,8 +219,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\jquery-1.11.1.min.js" />
+    <Resource Include="Resources\icon_target.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\XPath Extractor\XPath Extractor.csproj">
+      <Project>{E13D4511-2393-42EB-9F8F-03A41E98C4D0}</Project>
+      <Name>XPath Extractor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
