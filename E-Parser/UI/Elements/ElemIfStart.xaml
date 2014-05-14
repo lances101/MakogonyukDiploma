@@ -8,21 +8,22 @@
              xmlns:eParser="clr-namespace:E_Parser"
              xmlns:elementLogic="clr-namespace:E_Parser.Logic.ElementLogic"
              mc:Ignorable="d" 
-             Height="158" Width="400" MaxHeight="150" MaxWidth="400"
+             Height="90" Width="400" MaxHeight="400" MaxWidth="600"
              >
 
     <Border BorderBrush="LightGray"  BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" Background="#FF0080BB">
         <Grid>
             <Label HorizontalContentAlignment="Center" Content="If Comparer (Start)" HorizontalAlignment="Stretch"  VerticalAlignment="Top" Height="30" Foreground="White" />
-            
+
             <ComboBox x:Name="cmbbxIfType" 
                       ItemsSource="{Binding Source={my:Enumeration {x:Type elementLogic:IfCompareType}}}"
                       DisplayMemberPath="Description"
                       SelectedValue="{Binding CurrentCompareType}"
                       SelectedValuePath="Value"
-                      HorizontalAlignment="Left" Margin="165,49,0,0" VerticalAlignment="Top" Width="64" SelectionChanged="cmbbxIfType_SelectionChanged"/>
-            <elements:ElemParameterTap HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top"/>
-            <elements:ElemParameterTap HorizontalAlignment="Left" Margin="234,30,0,0" VerticalAlignment="Top"/>
+                      HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0" SelectionChanged="cmbbxIfType_SelectionChanged"/>
+
+            <elements:ElemLoadSingleVariable x:Name="LoaderLeft" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Center"/>
+            <elements:ElemLoadSingleVariable x:Name="LoaderRight" HorizontalAlignment="Right" Margin="10,20,0,0" VerticalAlignment="Center"/>
 
         </Grid>
     </Border>

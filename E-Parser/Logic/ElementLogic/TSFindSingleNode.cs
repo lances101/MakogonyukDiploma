@@ -24,10 +24,10 @@ namespace E_Parser.Logic.ElementLogic
             get { return "Find Single Node"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
-            if (args[0] is HtmlNode)
-                return (args[0] as HtmlNode).SelectSingleNode(DirectStringInput);
+            if (args is HtmlNode)
+                return (args as HtmlNode).SelectSingleNode(DirectStringInput);
             return Session.Client.HAP.GetSingleElement(DirectStringInput);
 
         }

@@ -24,7 +24,7 @@ namespace TheE_Parser
             {
                 HtmlAgilityPack.HtmlDocument hapdoc = new HtmlAgilityPack.HtmlDocument();
                 hapdoc.LoadHtml(html);
-               _nodes = hapdoc.DocumentNode.SelectNodes("." + xpath.Replace("'", "\""));
+               _nodes = hapdoc.DocumentNode.SelectNodes(xpath.Replace("'", "\""));
                 return _nodes.Count;
             }
             catch (Exception e)

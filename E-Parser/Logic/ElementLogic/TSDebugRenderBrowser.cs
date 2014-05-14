@@ -9,10 +9,10 @@ using E_Parser.UI.Elements;
 namespace E_Parser.Logic.ElementLogic
 {
     [Serializable]
-    public class TSStart : TSBase
+    public class TSDebugRenderBrowser : TSBase
     {
         
-        public TSStart(TaskSession ts) : base(ts)
+        public TSDebugRenderBrowser(TaskSession ts) : base(ts)
         {
            
         }
@@ -24,13 +24,14 @@ namespace E_Parser.Logic.ElementLogic
 
         protected override object _mainTaskMethod(object args)
         {
-            return null;
+            Session.Client.RenderToPng();
+            return args;
         }
 
         protected override void StaticTypes(TaskSession ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.None };
-            OutputType = ParameterTypes.None;
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any};
+            OutputType = ParameterTypes.Any;
             ElemType = typeof(ElemStart);
         }
     }

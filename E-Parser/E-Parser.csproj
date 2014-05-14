@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="CompareType.cs" />
+    <Compile Include="Logic\ElementLogic\TSDebugRenderBrowser.cs" />
+    <Compile Include="Logic\ElementLogic\TSHonk.cs" />
+    <Compile Include="Logic\ElementLogic\TSRestart.cs" />
     <Compile Include="Logic\ElementLogic\TSLoadSingleVariable.cs" />
     <Compile Include="Logic\ElementLogic\TSDebugMessage.cs" />
     <Compile Include="Logic\ElementLogic\TSIfEnd.cs" />
@@ -70,6 +73,17 @@
     <Compile Include="Logic\ElementLogic\TSWhile.cs" />
     <Compile Include="Logic\EnumerationExtension.cs" />
     <Compile Include="Logic\ParsedItem.cs" />
+    <Compile Include="Logic\StoredVariable.cs" />
+    <Compile Include="Logic\TypeExtension.cs" />
+    <Compile Include="UI\Elements\ElemHonk.xaml.cs">
+      <DependentUpon>ElemHonk.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemDebugBrowserRender.xaml.cs">
+      <DependentUpon>ElemDebugBrowserRender.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemRestart.xaml.cs">
+      <DependentUpon>ElemRestart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Elements\ElemLoadSingleVariable.xaml.cs">
       <DependentUpon>ElemLoadSingleVariable.xaml</DependentUpon>
     </Compile>
@@ -107,6 +121,18 @@
     <Compile Include="UI\SessionEditor.xaml.cs">
       <DependentUpon>SessionEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\Elements\ElemHonk.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemDebugBrowserRender.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemRestart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Elements\ElemLoadSingleVariable.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,7 +192,7 @@
     <Compile Include="UI\Elements\ElemStart.xaml.cs">
       <DependentUpon>ElemStart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Logic\AwesomiumWrap.cs" />
+    <Compile Include="Logic\ExternalWrappers\AwesomiumWrap.cs" />
     <Compile Include="Logic\ElementLogic\TSBase.cs" />
     <Compile Include="Logic\ElementLogic\TSEnd.cs" />
     <Compile Include="Logic\ElementLogic\TSFindNodes.cs" />
@@ -174,7 +200,7 @@
     <Compile Include="Logic\ElementLogic\TaskSession.cs" />
     <Compile Include="Logic\ElementLogic\TSLoadURL.cs" />
     <Compile Include="Logic\ElementLogic\TSTextInput.cs" />
-    <Compile Include="Logic\HAPWrap.cs" />
+    <Compile Include="Logic\ExternalWrappers\HAPWrap.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -202,8 +228,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

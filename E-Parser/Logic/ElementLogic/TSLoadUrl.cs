@@ -23,14 +23,14 @@ namespace E_Parser.Logic.ElementLogic
             get { return "LoadURL"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
-            if (!Session.Client.LoadUrl(String.IsNullOrEmpty(DirectStringInput)? args[0] as string : DirectStringInput)) return false;
+            if (!Session.Client.LoadUrl(String.IsNullOrEmpty(DirectStringInput)? args as string : DirectStringInput)) return false;
             while (Session.Client.IsLoading())
             {
-                
+                Thread.Sleep(1000);
             }
-            Session.Client.RenderToPng();
+
             return true;
         }
 

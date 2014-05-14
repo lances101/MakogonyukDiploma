@@ -15,18 +15,14 @@ namespace E_Parser.Logic.ElementLogic
             
         }
 
-        public override string DirectStringInput
-        {
-            get { return Session.GetNextTask(this).DirectStringInput; }
-            set { Session.GetNextTask(this).DirectStringInput = value; }
-        }
+        
 
         public override string GetName
         {
             get { return "TextInput"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
             return DirectStringInput;
         }

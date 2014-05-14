@@ -9,17 +9,17 @@ using E_Parser.UI.Elements;
 namespace E_Parser.Logic.ElementLogic
 {
     [Serializable]
-    public class TSStart : TSBase
+    public class TSRestart : TSBase
     {
         
-        public TSStart(TaskSession ts) : base(ts)
+        public TSRestart(TaskSession ts) : base(ts)
         {
            
         }
 
         public override string GetName
         {
-            get { return "StartSession"; }
+            get { return "Restart Session"; }
         }
 
         protected override object _mainTaskMethod(object args)
@@ -27,11 +27,12 @@ namespace E_Parser.Logic.ElementLogic
             return null;
         }
 
+
         protected override void StaticTypes(TaskSession ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.None };
-            OutputType = ParameterTypes.None;
-            ElemType = typeof(ElemStart);
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
+            OutputType = ParameterTypes.Any;
+            ElemType = typeof(ElemRestart);
         }
     }
 }

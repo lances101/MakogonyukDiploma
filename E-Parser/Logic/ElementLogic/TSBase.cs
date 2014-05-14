@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using E_Parser.UI;
 using E_Parser.UI.Elements;
+using HtmlAgilityPack;
 
 namespace E_Parser.Logic.ElementLogic
 {
@@ -62,6 +63,41 @@ namespace E_Parser.Logic.ElementLogic
         public abstract string GetName { get; }
         public List<ParameterTypes> InputTypes { get; set; }
         public ParameterTypes OutputType { get; set; }
+
+        public Type OutputTypeAsType
+        {
+            get
+            {
+                switch (OutputType)
+                {
+                    case ParameterTypes.None:
+                        return null;
+                        break;
+                    case ParameterTypes.Any:
+                        return typeof (object);
+                        break;
+                    case ParameterTypes.String:
+                        return typeof (string);
+                        break;
+                    case ParameterTypes.Integer:
+                        return typeof (int);
+                        break;
+                    case ParameterTypes.NodeList:
+                        return typeof (HtmlNodeCollection);
+                        break;
+                    case ParameterTypes.Node:
+                        return typeof (HtmlNode);
+                        break;
+                    case ParameterTypes.Boolean:
+                        return typeof (bool);
+                        break;
+                    case ParameterTypes.PassThrough:
+                        return typeof (object);
+                        break;
+                }
+                return null;
+            }
+        }
         protected string directStringInput = "";
         public virtual string DirectStringInput
         {
@@ -83,13 +119,17 @@ namespace E_Parser.Logic.ElementLogic
 
         public TaskSession Session { get; set; }
         public event TaskEndedHandler OnTaskEnd;
-        protected abstract object _mainTaskMethod(object[] args);
+        protected abstract object _mainTaskMethod(object args);
 
         public virtual void AfterTaskAddition()
         {
             
         }
         public virtual void AfterTaskEnd()
+        {
+            
+        }
+        public virtual void BeforeDeletion()
         {
             
         }
@@ -104,7 +144,7 @@ namespace E_Parser.Logic.ElementLogic
             }
             return true;
         }
-        public void StartTask(params object[] args)
+        public void StartTask(object args)
         {
             
             IsBeingSubscribed();
@@ -116,6 +156,11 @@ namespace E_Parser.Logic.ElementLogic
             }
             task.ContinueWith(continuation => OnTaskCompleted(task.Result));
             
+        }
+
+        public object StartTaskNoWait(object args)
+        {
+            return _mainTaskMethod(args);
         }
 
         private void OnTaskCompleted(object result)

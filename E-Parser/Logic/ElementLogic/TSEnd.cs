@@ -21,7 +21,7 @@ namespace E_Parser.Logic.ElementLogic
             get { return "SessionEnd"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
             Session.EndSession();
             return null;

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using E_Parser.Logic;
 using E_Parser.Logic.ElementLogic;
 
 namespace E_Parser.UI.Elements
@@ -22,7 +23,9 @@ namespace E_Parser.UI.Elements
     public partial class ElemLoadSingleVariable : ElemBase
     {
         public ElemLoadSingleVariable()
-        {}
+        {
+            InitializeComponent();
+        }
         public ElemLoadSingleVariable(TaskSession ts)
         {
             InitializeComponent();
@@ -35,6 +38,40 @@ namespace E_Parser.UI.Elements
             
         }
 
-      
+        public override void AfterElementAddition()
+        {
+            var ind = Task.Session.SessionVariables.FindIndex(o => o == SelectedStoredVariable);
+            this.cmbbxVarRead.SelectedIndex = ind;
+            this.cmbbxVarRead.Items.Refresh();
+        }
+
+        public List<StoredVariable> SessionProxy
+        {
+            get { return Task.Session.SessionVariables; }
+            set { Task.Session.SessionVariables = value; }
+        }
+
+        public StoredVariable SelectedStoredVariable
+        {
+            get
+            {
+                return (Task as TSLoadSingleVariable).StoredVariable;
+            }
+            set { (Task as TSLoadSingleVariable).StoredVariable = value; }
+        }
+
+        private void CmbbxVarRead_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 0)
+            {
+                SelectedStoredVariable = e.RemovedItems[0] as StoredVariable;
+                cmbbxVarRead.SelectedItem = e.RemovedItems[0];
+            }
+            else if(this.SelectedStoredVariable.Name == null)
+            {
+                SelectedStoredVariable = e.AddedItems[0] as StoredVariable;
+            }
+
+        }
     }
 }

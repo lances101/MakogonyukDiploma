@@ -2,36 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using E_Parser.UI.Elements;
 
 namespace E_Parser.Logic.ElementLogic
 {
     [Serializable]
-    public class TSStart : TSBase
+    class TSHonk : TSBase
     {
-        
-        public TSStart(TaskSession ts) : base(ts)
+        public TSHonk(TaskSession ts) : base(ts)
         {
-           
         }
 
         public override string GetName
         {
-            get { return "StartSession"; }
+            get { return "Honk!"; }
         }
 
         protected override object _mainTaskMethod(object args)
         {
-            return null;
+            Console.Beep(4000, 5000);
+            return args;
         }
 
         protected override void StaticTypes(TaskSession ts)
         {
             InputTypes = new List<ParameterTypes>() { ParameterTypes.None };
             OutputType = ParameterTypes.None;
-            ElemType = typeof(ElemStart);
+            ElemType = typeof(ElemHonk);
         }
     }
 }

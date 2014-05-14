@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using E_Parser.UI;
@@ -17,8 +18,10 @@ namespace E_Parser.Logic.ElementLogic
         private List<TSBase> _functionalElements = new List<TSBase>();
         [NonSerialized()] public List<ElemBase> VisualElements;
         [NonSerialized()] private AwesomiumWrap _client;
-        public Dictionary<string, object> SessionVariables = new Dictionary<string, object>();
+        public List<StoredVariable> SessionVariables = new List<StoredVariable>();
         private int currentTaskIndex;
+        public bool TaskIsRunning { get; set; }
+        private bool ShouldForceStop = false;
 
         public AwesomiumWrap Client
         {
@@ -49,7 +52,8 @@ namespace E_Parser.Logic.ElementLogic
             
             VisualElements = visualElements;
             Client = new AwesomiumWrap();
-            AddNewTask(null, typeof (ElemStart));
+            var start = AddNewTask(null, typeof (ElemStart));
+            AddNewTask(start, typeof(ElemEnd));
 
         }
 
@@ -58,15 +62,16 @@ namespace E_Parser.Logic.ElementLogic
         {
             CurrentTaskIndex = 0;
             ClearVariables();
+            TaskIsRunning = true;
             _functionalElements.ElementAt(0).StartTask(null);
             
         }
 
         void ClearVariables()
         {
-            for (int i = 0; i < SessionVariables.Count; i++)
+            foreach (var storedVariable in SessionVariables)
             {
-                SessionVariables[SessionVariables.Keys.ElementAt(i)] = null;
+                storedVariable.Value = null;
             }
         }
         
@@ -79,22 +84,54 @@ namespace E_Parser.Logic.ElementLogic
 
         private void Task_OnTaskEnd(object sender, TaskEndEventArgs e)
         {
-            
+            if (ShouldForceStop)
+            {
+                EndSession();
+                return;
+            }
             if (!e.EventSuccessful) throw new Exception("NEED TO HANDLE THIS");
             var lastTask = sender as TSBase;
             CurrentTaskIndex = GetTaskIndex(lastTask);
             lastTask.AfterTaskEnd();
-            if (lastTask.GetType() != typeof(TSEnd))
+            if (lastTask.GetType() == typeof (TSRestart))
             {
-                FunctionalElements.ElementAt(CurrentTaskIndex + 1).StartTask(e.Result);
+                RestartSession();
+                return;
             }
-            else
+            if(lastTask.GetType() == typeof(TSEnd))
+            {
                 EndSession();
+            }
+
+            FunctionalElements.ElementAt(CurrentTaskIndex + 1).StartTask(e.Result);
         }
 
         public void EndSession()
         {
+            ShouldForceStop = false;
+            TaskIsRunning = false;
             SessionEditor.Log("Session has ended");
+            
+        }
+
+        public void RestartSession()
+        {
+            EndSession();
+            Thread.Sleep(1000);
+            StartSession();
+        }
+        public void ForceStop()
+        {
+            ShouldForceStop = true;
+        }
+
+        public void Clear()
+        {
+            FunctionalElements.Clear();
+            VisualElements.Clear();
+            SessionVariables.Clear();
+            var start = AddNewTask(null, typeof(ElemStart));
+            AddNewTask(start, typeof(ElemEnd));
         }
         #endregion
 
@@ -132,7 +169,8 @@ namespace E_Parser.Logic.ElementLogic
             TryAddEventSubscription(task);
             task.VisualElement = newElem;
             VisualElements.Add(newElem);
-            task.AfterTaskAddition();
+            newElem.AfterElementAddition();
+            //task.AfterTaskAddition();
         }
         private bool TryAddNewElement(ElemBase origin, ElemBase adding)
         {
@@ -144,6 +182,7 @@ namespace E_Parser.Logic.ElementLogic
             InsertTaskAfterElement(origin, adding);
             if (origin != null) origin.NextElementReaction(adding);
             adding.Task.AfterTaskAddition();
+            adding.AfterElementAddition();
             return true;
         }
         private void InsertTaskAfterElement(ElemBase origin, ElemBase adding)
@@ -199,5 +238,18 @@ namespace E_Parser.Logic.ElementLogic
         }
         #endregion
 
+        public void DeleteItem(ElemBase elemBase)
+        {
+            int toDelete = this.GetTaskIndex(elemBase.Task);
+            elemBase.Task.BeforeDeletion();
+            this.FunctionalElements.RemoveAt(toDelete);
+            this.VisualElements.RemoveAt(toDelete);
+            
+        }
+
+
+
     }
+
+   
 }

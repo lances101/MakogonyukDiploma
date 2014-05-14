@@ -16,15 +16,25 @@ namespace E_Parser.Logic.ElementLogic
             
         }
 
+        private StoredVariable storedVariable = new StoredVariable();
+        public StoredVariable StoredVariable
+        {
+            get { return storedVariable; }
+            set
+            {
+                storedVariable = value;
+                this.OutputType = storedVariable.Type.ConverToParameterTypes();
+            }
+        }
 
         public override string GetName
         {
             get { return "Load Variable"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
-            return Session.SessionVariables[args[0].ToString()];
+            return storedVariable.Value;
         }
 
         protected override void StaticTypes(TaskSession ts)

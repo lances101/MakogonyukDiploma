@@ -18,28 +18,24 @@ using E_Parser.UI.Elements;
 
 namespace E_Parser.UI.Elements
 {
-    public partial class ElemIfEnd : ElemBase
+
+    public partial class ElemHonk : ElemBase
     {
-        
-
-        public ElemIfEnd(TaskSession currentSession)
+        public ElemHonk()
         {
-            InitializeComponent();
-            Task = new TSIfEnd(currentSession);
         }
 
-        public ElemIfEnd()
+        public ElemHonk(TaskSession CurrentSession)
         {
             InitializeComponent();
+            Task = new TSHonk(CurrentSession);
         }
-        public ElemIfEnd(TSBase ts)
+
+        public ElemHonk(TSBase ts)
         {
             InitializeComponent();
             Task = ts;
         }
 
-        private void cmbbxIfType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
     }
 }

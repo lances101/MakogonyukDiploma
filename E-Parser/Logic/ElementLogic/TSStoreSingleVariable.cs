@@ -16,6 +16,21 @@ namespace E_Parser.Logic.ElementLogic
             
         }
 
+        public override void AfterTaskAddition()
+        {
+            DirectStringInput = String.Format("variable{0}", Session.SessionVariables.Count);
+            Session.SessionVariables.Add(new StoredVariable()
+            {
+                Name = DirectStringInput,
+                Type = PreviousTask.OutputTypeAsType,
+                Value = null
+            });
+        }
+
+        public override void BeforeDeletion()
+        {
+            Session.SessionVariables.RemoveAll(o => o.Name == DirectStringInput);
+        }
 
         public override string GetName
         {
@@ -35,20 +50,20 @@ namespace E_Parser.Logic.ElementLogic
         public void VariableNameChanged(string value)
         {
             if (value == directStringInput) return;
-            for(int i = 0; i < Session.SessionVariables.Count; i++)
+            foreach (var storedVariable in Session.SessionVariables)
             {
-                if (Session.SessionVariables.Keys.ElementAt(i) == directStringInput)
+                if (storedVariable.Name == directStringInput)
                 {
-                    Session.SessionVariables.Remove(directStringInput);
-                    break;
+                    storedVariable.Name = value;
+                    storedVariable.Type = PreviousTask.OutputTypeAsType;
                 }
             }
-            Session.SessionVariables.Add(value, null);
+
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
-            Session.SessionVariables[directStringInput] = args[0];
+            Session.SessionVariables.Find(o => o.Name == directStringInput).Value = args;
             return args;
         }
 

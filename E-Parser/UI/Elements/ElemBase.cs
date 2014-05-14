@@ -45,7 +45,11 @@ namespace E_Parser.UI.Elements
         {
             _task = task;
         }
-        
+
+        public virtual void AfterElementAddition()
+        {
+            
+        }
         public virtual void NextElementReaction(ElemBase next)
         {
         }

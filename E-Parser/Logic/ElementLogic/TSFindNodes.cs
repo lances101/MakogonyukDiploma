@@ -22,16 +22,10 @@ namespace E_Parser.Logic.ElementLogic
             get { return "FindNodes"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
             HtmlNodeCollection collection = null;
-
-            if (args.Count() == 2)
-                collection = (args[1] as HtmlNode).SelectNodes(args[0] as string);
-            else
-            {
-                collection = Session.Client.HAP.GetMultipleElements(args[0] as string);    
-            }
+            collection = Session.Client.HAP.GetMultipleElements(args as string);    
             return collection;
         }
 

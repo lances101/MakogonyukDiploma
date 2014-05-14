@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using E_Parser.Logic.ElementLogic;
 using E_Parser.UI.Elements;
+using Microsoft.Win32;
 using TheE_Parser;
 
 namespace E_Parser.UI
@@ -36,13 +37,15 @@ namespace E_Parser.UI
         public static void Log(string message)
         {
             if (rtbxLogBox == null) return;
+            
             try
             {
                 rtbxLogBox.AppendText(message + "\n");
+                rtbxLogBox.ScrollToEnd();
             }
             catch (Exception e)
             {
-                rtbxLogBox.Dispatcher.Invoke(() => Log(message));
+                rtbxLogBox.Dispatcher.InvokeAsync(new Action(() => Log(message)));
             }
 
         }
@@ -56,10 +59,46 @@ namespace E_Parser.UI
         {
             Log(obj.ToString());
         }
+
+        public bool OpenFileDialog(bool save, out string filename, out string title)
+        {
+            // Create OpenFileDialog 
+            FileDialog dlg = null;
+            if (save)
+                dlg = new Microsoft.Win32.SaveFileDialog();
+            else
+                dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".psf";
+            dlg.Filter = "Parser Sequence File|*.psf";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                filename = dlg.FileName;
+                title = dlg.SafeFileName;
+            }
+            else
+            {
+                filename = "";
+                title = "";
+            }
+            return result.Value;
+
+        }
         public void LoadSession()
         {
+            string fileName, title;
+            if (!OpenFileDialog(false, out fileName, out title)) return;
             BinaryFormatter bf = new BinaryFormatter();
-            using (FileStream fs = new FileStream("./lastSession.psf", FileMode.Open))
+            using (FileStream fs = new FileStream(fileName, FileMode.Open))
             {
                 CurrentSession = (TaskSession) bf.Deserialize(fs);
             }
@@ -67,19 +106,20 @@ namespace E_Parser.UI
             CurrentSession.Client = new AwesomiumWrap();
             VisualElements.Clear();
             foreach (var e in CurrentSession.FunctionalElements)
-            {
-                SessionEditor.Log(e.GetName);
                 CurrentSession.RestoreTask(e);
-            }
-
+            Log("Session {0} was loaded", title);
         }
         public void SaveSession()
         {
+            string fileName, title;
+            if (!OpenFileDialog(false, out fileName, out title)) return;
+            if (String.IsNullOrEmpty(fileName)) return;
             BinaryFormatter bf = new BinaryFormatter();
-            using (FileStream fs = new FileStream("./lastSession.psf", FileMode.Create))
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
                 bf.Serialize(fs, _session);
             }
+            Log("Session {0} was loaded", title);
         }
 
         public SessionEditor()
@@ -113,6 +153,12 @@ namespace E_Parser.UI
                     case "tElemDebugMessage":
                         AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemDebugMessage));
                         break;
+                    case "tElemDebugRenderBrowser":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemDebugBrowserRender));
+                        break;
+                    case "tElemHonk":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemHonk));
+                        break;
                             
                     //routine specific
                     case "tElemStart":
@@ -120,6 +166,9 @@ namespace E_Parser.UI
                         break;
                     case "tElemEnd":
                         AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemEnd));
+                        break;
+                    case "tElemRestart":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemRestart));
                         break;
 
                     //variable control
@@ -129,7 +178,17 @@ namespace E_Parser.UI
                     case "tElemStoreSingleVariable":
                         AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemStoreSingleVariable));
                         break;
-
+                    case "tElemLoadSingleVariable":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemLoadSingleVariable));
+                        break;
+                    case "tElemParameterTap":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemParameterTap));
+                        break;
+                    
+                    //cyclomatic stuff
+                    case "tElemIfStart":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemIfStart));
+                        break;
 
                     //web control
                     case "tElemLoadURL":
@@ -197,6 +256,22 @@ namespace E_Parser.UI
             SessionViewer.Items.Refresh();
         }
 
-       
+        private void Context_DeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (SessionViewer.SelectedItem == null) return;
+            CurrentSession.DeleteItem(SessionViewer.SelectedItem as ElemBase);
+            SessionViewer.Items.Refresh();       
+        }
+
+        private void btn_ForceStop(object sender, RoutedEventArgs e)
+        {
+            CurrentSession.ForceStop();
+        }
+
+        private void btn_Clear(object sender, RoutedEventArgs e)
+        {
+            CurrentSession.Clear();
+            SessionViewer.Items.Refresh();
+        }
     }
 }

@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:elements="clr-namespace:E_Parser.UI.Elements"
         x:Class="E_Parser.UI.SessionEditor"
-        Title="SessionEditor" Height="600" Width="587" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid>
+        Title="SessionEditor" Height="600" Width="699" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid Background="#FF153D72">
         <TreeView x:Name="ElementTreeView" HorizontalAlignment="Left" Height="537" VerticalAlignment="Top" Width="249" Margin="0,32,0,0">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
@@ -12,15 +12,23 @@
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeViewItem Header="Debug Argument">
-                <TreeViewItem x:Name="tElemDebugMessage" Header="Start"/>
+                <TreeViewItem x:Name="tElemDebugMessage" Header="Parameter to message"/>
+                <TreeViewItem x:Name="tElemDebugRenderBrowser" Header="Render browser"/>
+                <TreeViewItem x:Name="tElemHonk" Header="Honk!"/>
             </TreeViewItem>
             <TreeViewItem Header="Routine Specific">
                 <TreeViewItem x:Name="tElemStart" Header="Start"/>
                 <TreeViewItem x:Name="tElemEnd" Header="Stop"></TreeViewItem>
+                <TreeViewItem x:Name="tElemRestart" Header="Restart"/>
             </TreeViewItem>
             <TreeViewItem Header="Variable Control">
                 <TreeViewItem  x:Name="tElemTextInput" Header="Manual text input" ></TreeViewItem>
                 <TreeViewItem  x:Name="tElemStoreSingleVariable" Header="Store single variable" ></TreeViewItem>
+                <TreeViewItem  x:Name="tElemLoadSingleVariable" Header="Load single variable" ></TreeViewItem>
+                <TreeViewItem  x:Name="tElemParameterTap" Header="Tap into parameter" ></TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="Cyclomatic">
+                <TreeViewItem  x:Name="tElemIfStart" Header="If comparison" ></TreeViewItem>
             </TreeViewItem>
             <TreeViewItem Header="Web Related">
                 <TreeViewItem  x:Name="tElemLoadURL" Header="Load URL" ></TreeViewItem>
@@ -34,19 +42,25 @@
 
         <ListBox  x:Name="SessionViewer" ItemsSource="{Binding VisualElements}" 
                   HorizontalContentAlignment="Center"  HorizontalAlignment="Left" 
-                  Height="410" Margin="249,32,0,0" VerticalAlignment="Top" Width="327">
-
+                  Height="410" Margin="254,32,0,0" VerticalAlignment="Top" Width="427">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Click="Context_DeleteClick"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
         </ListBox>
         <Button Content="GO" HorizontalAlignment="Left" Margin="170,7,0,0" VerticalAlignment="Top" Width="75" Click="StartSession_Click"/>
         <Button Content="Save" HorizontalAlignment="Left" Margin="90,7,0,0" VerticalAlignment="Top" Width="75" Click="SaveSession_Click"/>
         <Button Content="Load" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="75" Click="LoadSession_Click"/>
-        <RichTextBox x:Name="rtbxLog" HorizontalAlignment="Left" Height="127" Margin="249,442,0,0" VerticalAlignment="Top" Width="327">
+        <RichTextBox x:Name="rtbxLog" HorizontalAlignment="Left" Height="122" Margin="254,447,0,0" VerticalAlignment="Top" Width="427">
             <FlowDocument LineHeight="1">
                 <Paragraph>
                     <Run Text=""/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <Button Content="Force Stop" HorizontalAlignment="Left" Margin="250,7,0,0" VerticalAlignment="Top" Width="75" Click="btn_ForceStop"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="330,7,0,0" VerticalAlignment="Top" Width="75" Click="btn_Clear"/>
 
     </Grid>
 </Window>

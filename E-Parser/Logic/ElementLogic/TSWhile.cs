@@ -20,7 +20,7 @@ namespace E_Parser.Logic.ElementLogic
             get { return "While Loop"; }
         }
 
-        protected override object _mainTaskMethod(object[] args)
+        protected override object _mainTaskMethod(object args)
         {
             return null;
         }

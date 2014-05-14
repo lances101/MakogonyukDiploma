@@ -143,10 +143,8 @@ namespace TheE_Parser
                 return;
             if (e.IsMainFrame)
             {
-
                 if (View.IsDocumentReady == true)
                 {
-
                     isLoading = false;
                     LoadingActuallyCompleted();
                 }

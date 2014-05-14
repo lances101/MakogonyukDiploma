@@ -8,20 +8,37 @@ namespace E_Parser.UI.Elements
 
     public partial class ElemParameterTap : ElemBase
     {
-        public NodeTap tNodeTap { get; set; }
-        public StringTap tStringTap { get; set; }
+        public NodeTap tNodeTap {
+            get
+            {
+                return (Task as TSParameterTap).tNodeTap;
+            }
+            set
+            {
+                (Task as TSParameterTap).tNodeTap = value;
+            } 
+        }
+        public StringTap tStringTap
+        {
+            get { return (Task as TSParameterTap).tStringTap; }
+            set { (Task as TSParameterTap).tStringTap = value; }
+        }
 
 
         public ElemParameterTap(TaskSession CurrentSession)
         {
             InitializeComponent();
             Task = new TSParameterTap(CurrentSession);
+        }
+
+        public override void AfterElementAddition()
+        {
             SwitchOutputType();
         }
 
         public void SwitchOutputType()
         {
-            switch (Task.NextTask.OutputType)
+            switch (Task.PreviousTask.OutputType)
             {
                 case TSBase.ParameterTypes.None:
                     break;
@@ -44,6 +61,8 @@ namespace E_Parser.UI.Elements
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            
         }
 
         public void UIChanger(ComboBox nodeTap)
@@ -59,15 +78,22 @@ namespace E_Parser.UI.Elements
                     cmb.Visibility = Visibility.Visible;
                 }
             }
+
         }
         public ElemParameterTap()
         {
             InitializeComponent();
         }
+        
         public ElemParameterTap(TSBase ts)
         {
             InitializeComponent();
             Task = ts;
+        }
+
+        private void CmbbxNodeTap_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Task.OutputType = (Task as TSParameterTap).DetermineType(Task.PreviousTask.OutputType);
         }
     }
 }
