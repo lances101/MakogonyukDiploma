@@ -11,9 +11,9 @@ using HtmlAgilityPack;
 namespace E_Parser.Logic.ElementLogic
 {
     [Serializable]
-    public class TSFindSingleNode : TSBase
+    public class TSClickElement : TSBase
     {
-        public TSFindSingleNode(TaskSession ts): base(ts)
+        public TSClickElement(TaskSession ts): base(ts)
         {
             
         }

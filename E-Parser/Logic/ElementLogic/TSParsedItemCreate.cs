@@ -7,29 +7,31 @@ using E_Parser.UI.Elements;
 
 namespace E_Parser.Logic.ElementLogic
 {
-    [Serializable]
-    class TSHonk : TSBase
+    class TSParsedItemCreate : TSBase
     {
-        public TSHonk(TaskSession ts) : base(ts)
+       public TSParsedItemCreate(TaskSession ts)
+            : base(ts)
         {
+            
         }
+        public ParsedItem ParsedItem { get; set; }
 
         public override string GetName
         {
-            get { return "Honk!"; }
+            get { return "New Parsed Item"; }
         }
 
         protected override object _mainTaskMethod(object args)
         {
-            Console.Beep(4000, 5000);
-            return args;
+            return DirectStringInput;
         }
 
         protected override void StaticTypes(TaskSession ts)
         {
-            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any};
-            OutputType = ParameterTypes.Any;
-            ElemType = typeof(ElemHonk);
+            InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
+            OutputType = ParameterTypes.ParsedItem;
+            ElemType = typeof(ElemStoreSingleVariable);
         }
+    
     }
 }

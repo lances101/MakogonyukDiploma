@@ -18,8 +18,10 @@ namespace E_Parser.Logic
                 return TSBase.ParameterTypes.Node;
             if (_type == typeof (HtmlNodeCollection))
                 return TSBase.ParameterTypes.NodeList;
+            if (_type == typeof (double))
+                return TSBase.ParameterTypes.Double;
             if (_type == typeof (int))
-                return TSBase.ParameterTypes.Integer;
+                return TSBase.ParameterTypes.Double;
             if (_type == typeof (bool))
                 return TSBase.ParameterTypes.Boolean;
             return  TSBase.ParameterTypes.None;

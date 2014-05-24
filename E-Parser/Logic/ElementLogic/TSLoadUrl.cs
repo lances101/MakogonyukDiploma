@@ -25,7 +25,7 @@ namespace E_Parser.Logic.ElementLogic
 
         protected override object _mainTaskMethod(object args)
         {
-            if (!Session.Client.LoadUrl(String.IsNullOrEmpty(DirectStringInput)? args as string : DirectStringInput)) return false;
+            if (!Session.Client.LoadUrl(args is string ? args as string : PreviousTask.DirectStringInput)) return false;
             while (Session.Client.IsLoading())
             {
                 Thread.Sleep(1000);

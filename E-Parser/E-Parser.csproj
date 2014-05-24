@@ -58,13 +58,20 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="CompareType.cs" />
+    <Compile Include="Logic\ElementLogic\TSClickElement.cs" />
+    <Compile Include="Logic\ElementLogic\TSVariableReadLoaded.cs" />
+    <Compile Include="Logic\ElementLogic\TSDeserializeSavebleVariables.cs" />
+    <Compile Include="Logic\ParsedField.cs" />
+    <Compile Include="Logic\ElementLogic\TSSerializeSavableVariables.cs" />
+    <Compile Include="Logic\ElementLogic\TSSaveSingleVariable.cs" />
+    <Compile Include="Logic\ElementLogic\TSParsedItemInteract.cs" />
     <Compile Include="Logic\ElementLogic\TSDebugRenderBrowser.cs" />
     <Compile Include="Logic\ElementLogic\TSHonk.cs" />
     <Compile Include="Logic\ElementLogic\TSRestart.cs" />
     <Compile Include="Logic\ElementLogic\TSLoadSingleVariable.cs" />
     <Compile Include="Logic\ElementLogic\TSDebugMessage.cs" />
     <Compile Include="Logic\ElementLogic\TSIfEnd.cs" />
-    <Compile Include="Logic\ElementLogic\TSAddNewItemType.cs" />
+    <Compile Include="Logic\ElementLogic\TSParsedItemCreate.cs" />
     <Compile Include="Logic\ElementLogic\TSFindSingleNode.cs" />
     <Compile Include="Logic\ElementLogic\ParameterOperation.cs" />
     <Compile Include="Logic\ElementLogic\TSParameterTap.cs" />
@@ -75,6 +82,18 @@
     <Compile Include="Logic\ParsedItem.cs" />
     <Compile Include="Logic\StoredVariable.cs" />
     <Compile Include="Logic\TypeExtension.cs" />
+    <Compile Include="UI\Elements\ElemVariableReadLoaded.xaml.cs">
+      <DependentUpon>ElemVariableReadLoaded.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemDeserializeSavebleVariables.xaml.cs">
+      <DependentUpon>ElemDeserializeSavebleVariables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemSerializeSavableVariables.xaml.cs">
+      <DependentUpon>ElemSerializeSavableVariables.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Elements\ElemSaveSingleVariable.xaml.cs">
+      <DependentUpon>ElemSaveSingleVariable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Elements\ElemHonk.xaml.cs">
       <DependentUpon>ElemHonk.xaml</DependentUpon>
     </Compile>
@@ -121,6 +140,22 @@
     <Compile Include="UI\SessionEditor.xaml.cs">
       <DependentUpon>SessionEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\Elements\ElemVariableReadLoaded.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemDeserializeSavebleVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemSerializeSavableVariables.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Elements\ElemSaveSingleVariable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Elements\ElemHonk.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -243,6 +278,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\jquery-1.11.1.min.js" />
+    <Resource Include="Resources\redDelete.png" />
+    <Resource Include="Resources\redOpen.png" />
+    <Resource Include="Resources\redSave.png" />
+    <Resource Include="Resources\redSaveAs.png" />
+    <Resource Include="Resources\redStart.png" />
+    <Resource Include="Resources\redStop.png" />
     <Resource Include="Resources\icon_target.png" />
   </ItemGroup>
   <ItemGroup>

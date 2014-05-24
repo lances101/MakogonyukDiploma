@@ -30,11 +30,12 @@ namespace E_Parser.Logic.ElementLogic
             None,
             Any,
             String,
-            Integer,
+            Double,
             NodeList,
             Node,
             Boolean,
-            PassThrough
+            PassThrough,
+            ParsedItem
         }
 
         private bool _isRunning;
@@ -79,7 +80,7 @@ namespace E_Parser.Logic.ElementLogic
                     case ParameterTypes.String:
                         return typeof (string);
                         break;
-                    case ParameterTypes.Integer:
+                    case ParameterTypes.Double:
                         return typeof (int);
                         break;
                     case ParameterTypes.NodeList:

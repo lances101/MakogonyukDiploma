@@ -19,6 +19,8 @@ namespace E_Parser.Logic.ElementLogic
         [NonSerialized()] public List<ElemBase> VisualElements;
         [NonSerialized()] private AwesomiumWrap _client;
         public List<StoredVariable> SessionVariables = new List<StoredVariable>();
+        public List<StoredVariable> SaveableVariables = new List<StoredVariable>(); 
+        public List<ParsedItem> ParsedItems = new List<ParsedItem>();
         private int currentTaskIndex;
         public bool TaskIsRunning { get; set; }
         private bool ShouldForceStop = false;
@@ -53,6 +55,7 @@ namespace E_Parser.Logic.ElementLogic
             VisualElements = visualElements;
             Client = new AwesomiumWrap();
             var start = AddNewTask(null, typeof (ElemStart));
+            SaveableVariables = new List<StoredVariable>();
             AddNewTask(start, typeof(ElemEnd));
 
         }

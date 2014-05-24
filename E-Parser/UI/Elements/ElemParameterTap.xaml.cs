@@ -47,7 +47,7 @@ namespace E_Parser.UI.Elements
                 case TSBase.ParameterTypes.String:
                     UIChanger(cmbbxStringTap);
                     break;
-                case TSBase.ParameterTypes.Integer:
+                case TSBase.ParameterTypes.Double:
                     break;
                 case TSBase.ParameterTypes.NodeList:
                     break;

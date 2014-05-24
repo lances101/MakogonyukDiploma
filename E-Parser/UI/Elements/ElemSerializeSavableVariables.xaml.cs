@@ -17,38 +17,27 @@ using E_Parser.Logic.ElementLogic;
 namespace E_Parser.UI.Elements
 {
     /// <summary>
-    /// Interaction logic for ElemDebugMessage.xaml
+    /// Interaction logic for ElemSerializeSavableVariables.xaml
     /// </summary>
-    public partial class ElemDebugMessage : ElemBase
+    public partial class ElemSerializeSavableVariables : ElemBase
     {
-        public ElemDebugMessage(TaskSession ts)
+        public ElemSerializeSavableVariables()
+        {}
+        public ElemSerializeSavableVariables(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSDebugMessage(ts);
+            Task = new TSSerializeSavableVariables(ts);
         }
-        public ElemDebugMessage(TSBase ts)
+        public ElemSerializeSavableVariables(TSBase ts)
         {
             InitializeComponent();
             Task = ts;
         }
 
-        public override void AfterElementAddition()
-        {
-            Task.OutputType = Task.PreviousTask.OutputType;
-        }
-
-        public ElemDebugMessage()
-        {
-            
-        }
         private void tbxUrl_TextChanged(object sender, TextChangedEventArgs e)
         {       
             //Task.DirectStringInput = tbxUrl.Text;
         }
 
-        public override void NextElementReaction(ElemBase next)
-        {
-            lblTitle.Content = "Text Input for " + next.Task.GetName;
-        }
     }
 }

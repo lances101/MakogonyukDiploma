@@ -23,7 +23,7 @@
                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0" SelectionChanged="cmbbxIfType_SelectionChanged"/>
 
             <elements:ElemLoadSingleVariable x:Name="LoaderLeft" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Center"/>
-            <elements:ElemLoadSingleVariable x:Name="LoaderRight" HorizontalAlignment="Right" Margin="10,20,0,0" VerticalAlignment="Center"/>
+            <elements:ElemLoadSingleVariable x:Name="LoaderRight" HorizontalAlignment="Right" Margin="0,20,10,0" VerticalAlignment="Center"/>
 
         </Grid>
     </Border>

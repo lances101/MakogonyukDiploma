@@ -3,64 +3,171 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:elements="clr-namespace:E_Parser.UI.Elements"
         x:Class="E_Parser.UI.SessionEditor"
-        Title="SessionEditor" Height="600" Width="699" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid Background="#FF153D72">
-        <TreeView x:Name="ElementTreeView" HorizontalAlignment="Left" Height="537" VerticalAlignment="Top" Width="249" Margin="0,32,0,0">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <EventSetter Event="MouseDoubleClick" Handler="OnTreeItem_Click"></EventSetter>
-                </Style>
-            </TreeView.ItemContainerStyle>
-            <TreeViewItem Header="Debug Argument">
-                <TreeViewItem x:Name="tElemDebugMessage" Header="Parameter to message"/>
-                <TreeViewItem x:Name="tElemDebugRenderBrowser" Header="Render browser"/>
-                <TreeViewItem x:Name="tElemHonk" Header="Honk!"/>
-            </TreeViewItem>
-            <TreeViewItem Header="Routine Specific">
-                <TreeViewItem x:Name="tElemStart" Header="Start"/>
-                <TreeViewItem x:Name="tElemEnd" Header="Stop"></TreeViewItem>
-                <TreeViewItem x:Name="tElemRestart" Header="Restart"/>
-            </TreeViewItem>
-            <TreeViewItem Header="Variable Control">
-                <TreeViewItem  x:Name="tElemTextInput" Header="Manual text input" ></TreeViewItem>
-                <TreeViewItem  x:Name="tElemStoreSingleVariable" Header="Store single variable" ></TreeViewItem>
-                <TreeViewItem  x:Name="tElemLoadSingleVariable" Header="Load single variable" ></TreeViewItem>
-                <TreeViewItem  x:Name="tElemParameterTap" Header="Tap into parameter" ></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Cyclomatic">
-                <TreeViewItem  x:Name="tElemIfStart" Header="If comparison" ></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Web Related">
-                <TreeViewItem  x:Name="tElemLoadURL" Header="Load URL" ></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Parsing Related">
-                <TreeViewItem  x:Name="tElemFindSingleNode" Header="Find single element (XPath)"></TreeViewItem>
-                <TreeViewItem  x:Name="tElemFindMultipleNodes" Header="Find multiple elements (XPath)"></TreeViewItem>
-            </TreeViewItem>
+        Title="SessionEditor" Height="600" Width="751" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid Background="#FFFF2323">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="538*"/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="32" Background="#FF001F47" Grid.RowSpan="2">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="38" Click="LoadSession_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button.Content>
+                    <Image Source="/Resources\redOpen.png"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Load profile...</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Width="38" Click="SaveSession_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button.Content>
+                    <Image Source="/Resources\redSave.png" VerticalAlignment="Center" Height="26"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Save profile</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" Width="38" Click="SaveSessionAs_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button.Content>
+                    <Image Source="/Resources\redSaveAs.png" VerticalAlignment="Center" Height="26"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Save profile as..</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Width="38" Click="StartSession_Click" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button.Content>
+                    <Image Source="/Resources\redStart.png" VerticalAlignment="Center" Height="26"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Start profile</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Top" Width="38" Click="btn_ForceStop" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button.Content>
+                    <Image Source="/Resources\redStop.png" VerticalAlignment="Center" Height="26"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Stop profile</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="38" Click="btn_Clear" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Button.Content>
+                    <Image Source="/Resources\redDelete.png" VerticalAlignment="Center" Height="26"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Clears the profile</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400*"/>
+                <RowDefinition Height="123*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240*"/>
+                <ColumnDefinition Width="500*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView Grid.Column="0" x:Name="ElementTreeView" HorizontalAlignment="Stretch"  Background="#FF153D72" 
+                      VerticalAlignment="Stretch" Margin="0,3,3,-2" Foreground="#FF9DC121" Grid.RowSpan="2">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <EventSetter Event="MouseDoubleClick" Handler="OnTreeItem_Click"></EventSetter>
+                        <Style.Resources>
+                            <!-- Set Highlight Background color -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFAE1313" />
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <!-- Set Foreground color -->
+                                <Setter Property="Foreground" Value="#FF4879B9" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <!-- Set Foreground color -->
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeViewItem Header="Debug Argument">
+                    <TreeViewItem x:Name="tElemDebugMessage" Header="Parameter to message" Foreground="White"/>
+                    <TreeViewItem x:Name="tElemDebugRenderBrowser" Header="Render browser" Foreground="White"/>
+                    <TreeViewItem x:Name="tElemHonk" Header="Honk!" Foreground="White"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Routine Specific">
+                    <TreeViewItem x:Name="tElemStart" Header="Start" Foreground="White" />
+                    <TreeViewItem x:Name="tElemEnd" Header="Stop" Foreground="White"/>
+                    <TreeViewItem x:Name="tElemRestart" Header="Restart" Foreground="White"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Variable Control">
+                    <TreeViewItem  x:Name="tElemTextInput" Header="Manual text input" Foreground="White" />
+                    <TreeViewItem  x:Name="tElemStoreSingleVariable" Header="Store single variable" Foreground="White"/>
+                    <TreeViewItem  x:Name="tElemReadSingleVariable" Header="Read single variable" Foreground="White"/>
+                    <TreeViewItem  x:Name="tElemParameterTap" Header="Tap into parameter" Foreground="White"/>
+                    <TreeViewItem Header="Serialization" Foreground="White">
+                        <TreeViewItem  x:Name="tElemSaveSingleVariable" Header="Add variable to serialization" Foreground="White"/>
+                        <TreeViewItem  x:Name="tElemSerializeSavebleVariables" Header="Serialize saveble variables" Foreground="White"/>
+                        <TreeViewItem  x:Name="tElemDeserializeSavebleVariables" Header="Deserialize saveble variables" Foreground="White"/>
+                        <TreeViewItem  x:Name="tElemVariableReadLoaded" Header="Read serializable variable" Foreground="White"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="Cyclomatic">
+                    <TreeViewItem  x:Name="tElemIfStart" Header="If comparison" Foreground="White"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Web Related">
+                    <TreeViewItem  x:Name="tElemLoadURL" Header="Load URL" Foreground="White"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Parsing Related">
+                    <TreeViewItem  x:Name="tElemClickElement" Header="Find single element (XPath)" Foreground="White"/>
+                    <TreeViewItem  x:Name="tElemFindMultipleNodes" Header="Find multiple elements (XPath)" Foreground="White"/>
+                </TreeViewItem>
 
-        </TreeView>
+            </TreeView>
+            <ListBox Grid.Row="0" x:Name="SessionViewer" ItemsSource="{Binding VisualElements}" 
+                      HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" Margin="0,3,0,125" VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="Context_DeleteClick"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
 
-        <ListBox  x:Name="SessionViewer" ItemsSource="{Binding VisualElements}" 
-                  HorizontalContentAlignment="Center"  HorizontalAlignment="Left" 
-                  Height="410" Margin="254,32,0,0" VerticalAlignment="Top" Width="427">
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Delete" Click="Context_DeleteClick"/>
-                </ContextMenu>
-            </ListBox.ContextMenu>
-        </ListBox>
-        <Button Content="GO" HorizontalAlignment="Left" Margin="170,7,0,0" VerticalAlignment="Top" Width="75" Click="StartSession_Click"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="90,7,0,0" VerticalAlignment="Top" Width="75" Click="SaveSession_Click"/>
-        <Button Content="Load" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="75" Click="LoadSession_Click"/>
-        <RichTextBox x:Name="rtbxLog" HorizontalAlignment="Left" Height="122" Margin="254,447,0,0" VerticalAlignment="Top" Width="427">
-            <FlowDocument LineHeight="1">
-                <Paragraph>
-                    <Run Text=""/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <Button Content="Force Stop" HorizontalAlignment="Left" Margin="250,7,0,0" VerticalAlignment="Top" Width="75" Click="btn_ForceStop"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="330,7,0,0" VerticalAlignment="Top" Width="75" Click="btn_Clear"/>
+            <RichTextBox x:Name="rtbxLog" HorizontalAlignment="Stretch" 
+                         Height="122" VerticalAlignment="Bottom"
+                         Grid.Column="1" Grid.Row="1">
+                <FlowDocument LineHeight="1">
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Grid>
+
 
     </Grid>
 </Window>

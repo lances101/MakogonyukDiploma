@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using E_Parser.UI;
 using E_Parser.UI.Elements;
 
 namespace E_Parser.Logic.ElementLogic
@@ -24,6 +25,7 @@ namespace E_Parser.Logic.ElementLogic
 
         protected override object _mainTaskMethod(object args)
         {
+            SessionEditor.Log("Session started");
             return null;
         }
 

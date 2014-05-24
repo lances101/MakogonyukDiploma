@@ -34,20 +34,16 @@ namespace E_Parser.UI
             set { _visualElements = value; }
         }
 
+        private static void LogUninvoked(string mess)
+        {
+            rtbxLogBox.AppendText(mess + "\n");
+            rtbxLogBox.ScrollToEnd();
+        }
         public static void Log(string message)
         {
-            if (rtbxLogBox == null) return;
-            
-            try
-            {
-                rtbxLogBox.AppendText(message + "\n");
-                rtbxLogBox.ScrollToEnd();
-            }
-            catch (Exception e)
-            {
-                rtbxLogBox.Dispatcher.InvokeAsync(new Action(() => Log(message)));
-            }
 
+            if (rtbxLogBox == null) return;
+            rtbxLogBox.Dispatcher.InvokeAsync(new Action(() => LogUninvoked(message))); 
         }
 
         public static void Log(string format, params object[] args)
@@ -107,19 +103,34 @@ namespace E_Parser.UI
             VisualElements.Clear();
             foreach (var e in CurrentSession.FunctionalElements)
                 CurrentSession.RestoreTask(e);
+            this.Title = title;
             Log("Session {0} was loaded", title);
         }
-        public void SaveSession()
+
+        private string lastOpenedFile = "";
+        private string lastOpenedFileTitle = "";
+        public void SaveSession(bool current)
         {
-            string fileName, title;
-            if (!OpenFileDialog(false, out fileName, out title)) return;
+            string fileName = "", title = "";
+            if (current)
+            {
+                fileName = lastOpenedFile;
+                title = lastOpenedFileTitle;
+            }
+            else
+            {
+                if (!OpenFileDialog(true, out fileName, out title)) return;    
+            }
+            
             if (String.IsNullOrEmpty(fileName)) return;
             BinaryFormatter bf = new BinaryFormatter();
             using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
                 bf.Serialize(fs, _session);
             }
-            Log("Session {0} was loaded", title);
+            lastOpenedFile = fileName;
+            lastOpenedFileTitle = title;
+            Log("Session {0} saved", title);
         }
 
         public SessionEditor()
@@ -179,11 +190,25 @@ namespace E_Parser.UI
                         AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemStoreSingleVariable));
                         break;
                     case "tElemLoadSingleVariable":
-                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemLoadSingleVariable));
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemVariableReadLoaded));
                         break;
                     case "tElemParameterTap":
                         AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemParameterTap));
                         break;
+
+                        // variable / serialization
+                        case "tElemSaveSingleVariable":
+                            AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemSaveSingleVariable));
+                            break;
+                        case "tElemSerializeSavebleVariables":
+                            AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemSerializeSavableVariables));
+                            break;
+                        case "tElemDeserializeSavebleVariables":
+                            AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemDeserializeSavebleVariables));
+                            break;
+                    case "tElemVariableReadLoaded":
+                            AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemVariableReadLoaded));
+                            break;
                     
                     //cyclomatic stuff
                     case "tElemIfStart":
@@ -197,8 +222,8 @@ namespace E_Parser.UI
 
 
                     //parser control
-                    case "tElemFindSingleNode":
-                        AddNewTask(SessionViewer.SelectedItem as ElemBase,typeof (ElemFindSingleNode));
+                    case "tElemClickElement":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase,typeof (ElemClickElement));
                         break;
 
                 }
@@ -214,39 +239,13 @@ namespace E_Parser.UI
             if (res != null) SessionViewer.SelectedItem = res;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemStart));
-            SessionViewer.Items.Refresh();
-            
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemTextInput));
-            SessionViewer.Items.Refresh();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemLoadURL));
-            SessionViewer.Items.Refresh();
-        }
-
-       
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            CurrentSession.AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemEnd));
-            SessionViewer.Items.Refresh();
-        }
         private void StartSession_Click(object sender, RoutedEventArgs e)
         {
             CurrentSession.StartSession();
         }
         private void SaveSession_Click(object sender, RoutedEventArgs e)
         {
-            SaveSession();
+            SaveSession(true);
             SessionViewer.Items.Refresh();
         }
 
@@ -271,6 +270,12 @@ namespace E_Parser.UI
         private void btn_Clear(object sender, RoutedEventArgs e)
         {
             CurrentSession.Clear();
+            SessionViewer.Items.Refresh();
+        }
+
+        private void SaveSessionAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveSession(false);
             SessionViewer.Items.Refresh();
         }
     }
