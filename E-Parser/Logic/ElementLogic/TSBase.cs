@@ -61,7 +61,7 @@ namespace E_Parser.Logic.ElementLogic
             set { _isRunning = value; }
         }
 
-        public abstract string GetName { get; }
+        public abstract string Name { get; }
         public List<ParameterTypes> InputTypes { get; set; }
         public ParameterTypes OutputType { get; set; }
 
@@ -147,9 +147,18 @@ namespace E_Parser.Logic.ElementLogic
         }
         public void StartTask(object args)
         {
-            
-            IsBeingSubscribed();
-            Task<object> task = Task.Factory.StartNew(() => { return _mainTaskMethod(args); });
+            Task<object> task = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    return _mainTaskMethod(args);
+                }
+                catch (Exception e)
+                {
+                    return e;
+                }
+                return null;
+            });
             if (this.GetType() == typeof (TSEnd))
             {
                 task.Wait();
@@ -168,7 +177,15 @@ namespace E_Parser.Logic.ElementLogic
         {
             if (OnTaskEnd != null)
             {
-                OnTaskEnd(this, new TaskEndEventArgs(true, result));
+                if (result is Exception)
+                {
+                    OnTaskEnd(this, new TaskEndEventArgs(false, result));
+                }
+                else
+                {
+                    OnTaskEnd(this, new TaskEndEventArgs(true, result));
+                }
+
             }
         }
     }

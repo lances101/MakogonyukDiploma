@@ -32,7 +32,7 @@ namespace E_Parser.Logic.ElementLogic
             Session.SessionVariables.RemoveAll(o => o.Name == DirectStringInput);
         }
 
-        public override string GetName
+        public override string Name
         {
             get { return "Store Variable"; }
         }

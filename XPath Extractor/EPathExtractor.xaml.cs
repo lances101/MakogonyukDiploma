@@ -43,7 +43,7 @@ namespace TheE_Parser
             awesomeTools.Callback += JSCallback_Handler;
             hapTools.displayTools.Callback += JSCallback_Handler;
             
-            awesomeTools.Client.Source = new Uri(IncomingURL ?? "http://google.com/");
+            awesomeTools.Client.Source = new Uri(String.IsNullOrEmpty(IncomingURL)? "http://google.com/" : IncomingURL);
         }
 
         void Client_DocumentReady(object sender, UrlEventArgs e)

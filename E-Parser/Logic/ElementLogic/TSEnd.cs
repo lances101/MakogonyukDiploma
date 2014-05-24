@@ -16,14 +16,14 @@ namespace E_Parser.Logic.ElementLogic
             
         }
 
-        public override string GetName
+        public override string Name
         {
             get { return "SessionEnd"; }
         }
 
         protected override object _mainTaskMethod(object args)
         {
-            Session.EndSession();
+            Session.EndSession("Task end reached");
             return null;
         }
 

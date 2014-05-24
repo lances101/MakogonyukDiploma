@@ -87,14 +87,19 @@ namespace E_Parser.Logic.ElementLogic
 
         private void Task_OnTaskEnd(object sender, TaskEndEventArgs e)
         {
-            if (ShouldForceStop)
-            {
-                EndSession();
-                return;
-            }
-            if (!e.EventSuccessful) throw new Exception("NEED TO HANDLE THIS");
             var lastTask = sender as TSBase;
             CurrentTaskIndex = GetTaskIndex(lastTask);
+            if (ShouldForceStop)
+            {
+                EndSession("Force stop fired");
+                return;
+            }
+            if (!e.EventSuccessful)
+            {
+                EndSession(String.Format("Task error at {0}\n{1} - {2}", CurrentTaskIndex, lastTask.Name, (e.Result as Exception).Message));
+                return;
+            }
+            
             lastTask.AfterTaskEnd();
             if (lastTask.GetType() == typeof (TSRestart))
             {
@@ -103,23 +108,23 @@ namespace E_Parser.Logic.ElementLogic
             }
             if(lastTask.GetType() == typeof(TSEnd))
             {
-                EndSession();
+                EndSession("Task reached End node");
             }
 
             FunctionalElements.ElementAt(CurrentTaskIndex + 1).StartTask(e.Result);
         }
 
-        public void EndSession()
+        public void EndSession(string reason)
         {
             ShouldForceStop = false;
             TaskIsRunning = false;
-            SessionEditor.Log("Session has ended");
+            SessionEditor.Log("[Session End] Reason : " + reason);
             
         }
 
         public void RestartSession()
         {
-            EndSession();
+            EndSession("Session restart fired");
             Thread.Sleep(1000);
             StartSession();
         }

@@ -16,7 +16,7 @@ namespace E_Parser.Logic.ElementLogic
         }
         public ParsedItem ParsedItem { get; set; }
 
-        public override string GetName
+        public override string Name
         {
             get { return "New Parsed Item"; }
         }

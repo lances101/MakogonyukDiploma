@@ -21,20 +21,20 @@ namespace E_Parser.UI.Elements
     /// <summary>
     /// Interaction logic for ElemTextInput.xaml
     /// </summary>
-    public partial class ElemClickElement : ElemBase
+    public partial class ElemFindSingleNode : ElemBase
     {
-        public ElemClickElement(TaskSession ts)
+        public ElemFindSingleNode(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSClickElement(ts);
+            Task = new TSFindSingleNode(ts);
         }
-        public ElemClickElement(TSBase ts)
+        public ElemFindSingleNode(TSBase ts)
         {
             InitializeComponent();
             Task = ts;
         }
 
-        public ElemClickElement()
+        public ElemFindSingleNode()
         {
             
         }
@@ -43,7 +43,7 @@ namespace E_Parser.UI.Elements
         {
            
                 int ind = Session.GetTaskIndex(Task);
-                var prevNode = Session.FunctionalElements.Last(o => o.GetType() == typeof(TSTextInput)  && o.Session.GetTaskIndex(o) < ind);
+                var prevNode = Session.FunctionalElements.Last(o => o.GetType() == typeof(TSLoadUrl)  && o.Session.GetTaskIndex(o) < ind);
                 EPathExtractor diagWin = new EPathExtractor(prevNode.DirectStringInput);
            
                 

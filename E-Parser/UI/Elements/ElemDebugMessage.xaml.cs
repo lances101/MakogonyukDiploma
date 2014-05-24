@@ -48,7 +48,7 @@ namespace E_Parser.UI.Elements
 
         public override void NextElementReaction(ElemBase next)
         {
-            lblTitle.Content = "Text Input for " + next.Task.GetName;
+            lblTitle.Content = "Text Input for " + next.Task.Name;
         }
     }
 }

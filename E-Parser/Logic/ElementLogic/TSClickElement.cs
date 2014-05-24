@@ -19,7 +19,7 @@ namespace E_Parser.Logic.ElementLogic
         }
 
 
-        public override string GetName
+        public override string Name
         {
             get { return "Find Single Node"; }
         }
@@ -36,7 +36,7 @@ namespace E_Parser.Logic.ElementLogic
         {
             InputTypes = new List<ParameterTypes>() { ParameterTypes.Any };
             OutputType = ParameterTypes.Node;
-            ElemType = typeof(ElemClickElement);
+            //ElemType = typeof(ElemClickElement);
         }
     }
 }

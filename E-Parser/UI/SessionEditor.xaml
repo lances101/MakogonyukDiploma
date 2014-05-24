@@ -143,7 +143,7 @@
                     <TreeViewItem  x:Name="tElemLoadURL" Header="Load URL" Foreground="White"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Parsing Related">
-                    <TreeViewItem  x:Name="tElemClickElement" Header="Find single element (XPath)" Foreground="White"/>
+                    <TreeViewItem  x:Name="tElemFindSingleNode" Header="Find single element (XPath)" Foreground="White"/>
                     <TreeViewItem  x:Name="tElemFindMultipleNodes" Header="Find multiple elements (XPath)" Foreground="White"/>
                 </TreeViewItem>
 

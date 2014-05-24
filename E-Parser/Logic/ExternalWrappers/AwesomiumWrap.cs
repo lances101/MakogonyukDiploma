@@ -102,6 +102,8 @@ namespace TheE_Parser
             }
             return View.IsLoading;
         }
+
+        private static string sDebugPNGSavePath = @"E:\Downloads\Debug\debug.png";
         public void RenderToPng()
         {
             if (View.InvokeRequired)
@@ -109,8 +111,10 @@ namespace TheE_Parser
                 InvokeWithoutArguments(new Action(RenderToPng));
                 return;
             }
-            SessionEditor.Log("SAVING " + ((BitmapSurface) View.Surface).SaveToPNG(@"F:\Debug\debug.png"));
-            Process.Start(@"F:\Debug\debug.png");
+            bool isSaved = ((BitmapSurface)View.Surface).SaveToPNG(sDebugPNGSavePath);
+            SessionEditor.Log("[Debug] Saving status : " + isSaved);
+            if (isSaved && File.Exists(sDebugPNGSavePath))
+                Process.Start(sDebugPNGSavePath);
         }
         public bool ClickElement(string xpath)
         {

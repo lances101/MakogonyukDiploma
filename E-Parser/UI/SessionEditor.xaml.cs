@@ -222,8 +222,8 @@ namespace E_Parser.UI
 
 
                     //parser control
-                    case "tElemClickElement":
-                        AddNewTask(SessionViewer.SelectedItem as ElemBase,typeof (ElemClickElement));
+                    case "tElemFindSingleNode":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase,typeof (ElemFindSingleNode));
                         break;
 
                 }

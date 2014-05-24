@@ -29,7 +29,7 @@ namespace E_Parser.Logic.ElementLogic
             }
         }
 
-        public override string GetName
+        public override string Name
         {
             get { return "Serialize saveble"; }
         }
