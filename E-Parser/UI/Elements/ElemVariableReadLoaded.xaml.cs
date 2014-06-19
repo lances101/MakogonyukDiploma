@@ -29,7 +29,7 @@ namespace E_Parser.UI.Elements
         public ElemVariableReadLoaded(TaskSession ts)
         {
             InitializeComponent();
-            Task = new TSLoadSingleVariable(ts);
+            Task = new TSVariableReadLoaded(ts);
         }
         public ElemVariableReadLoaded(TSBase ts)
         {
@@ -40,7 +40,7 @@ namespace E_Parser.UI.Elements
 
         public override void AfterElementAddition()
         {
-            var ind = Task.Session.SaveableVariables.FindIndex(o => o == SelectedStoredVariable);
+            var ind = Task.Session.SaveableVariables.FindIndex(o => o.Name == SelectedStoredVariable.Name);
             this.cmbbxVarRead.SelectedIndex = ind;
             this.cmbbxVarRead.Items.Refresh();
         }
@@ -55,9 +55,9 @@ namespace E_Parser.UI.Elements
         {
             get
             {
-                return (Task as TSLoadSingleVariable).StoredVariable;
+                return (Task as TSVariableReadLoaded).StoredVariable;
             }
-            set { (Task as TSLoadSingleVariable).StoredVariable = value; }
+            set { (Task as TSVariableReadLoaded).StoredVariable = value; }
         }
 
         private void CmbbxVarRead_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

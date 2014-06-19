@@ -10,21 +10,21 @@ namespace E_Parser.Logic
 {
     static class TypeExtension
     {
-        public static TSBase.ParameterTypes ConverToParameterTypes(this Type _type)
+        public static ParameterTypes ConverToParameterTypes(this Type _type)
         {
             if(_type == typeof(string))
-                return TSBase.ParameterTypes.String;
+                return ParameterTypes.String;
             if (_type == typeof (HtmlNode))
-                return TSBase.ParameterTypes.Node;
+                return ParameterTypes.Node;
             if (_type == typeof (HtmlNodeCollection))
-                return TSBase.ParameterTypes.NodeList;
+                return ParameterTypes.NodeList;
             if (_type == typeof (double))
-                return TSBase.ParameterTypes.Double;
+                return ParameterTypes.Double;
             if (_type == typeof (int))
-                return TSBase.ParameterTypes.Double;
+                return ParameterTypes.Double;
             if (_type == typeof (bool))
-                return TSBase.ParameterTypes.Boolean;
-            return  TSBase.ParameterTypes.None;
+                return ParameterTypes.Boolean;
+            return  ParameterTypes.None;
             
         }
     }

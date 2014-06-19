@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using E_Parser.Logic;
 using E_Parser.Logic.ElementLogic;
 using E_Parser.UI.Elements;
 using Microsoft.Win32;
@@ -20,12 +13,15 @@ using TheE_Parser;
 
 namespace E_Parser.UI
 {
-    /// <summary>
-    /// Interaction logic for SessionEditor.xaml
-    /// </summary>
+    public enum LogType
+    {
+        Debug, Message, Error
+    }
+
     public partial class SessionEditor : Window
     {
         private static RichTextBox rtbxLogBox;
+        private static bool displayDebug = false;
         private TaskSession _session;
         private List<ElemBase> _visualElements = new List<ElemBase>();
         public List<ElemBase> VisualElements
@@ -34,26 +30,52 @@ namespace E_Parser.UI
             set { _visualElements = value; }
         }
 
-        private static void LogUninvoked(string mess)
+        public bool RestartOnError
         {
-            rtbxLogBox.AppendText(mess + "\n");
-            rtbxLogBox.ScrollToEnd();
+            get { return _session.RestartOnError; }
+            set { _session.RestartOnError = value; }
         }
-        public static void Log(string message)
+        private static void LogUninvoked(LogType type, string mess)
+        {
+            string color = "";
+            switch (type)
+            {
+                case LogType.Debug:
+                    if (!displayDebug) return;
+                    color = "Blue";
+                    break;
+                case LogType.Message:
+                    color = "Black";
+                    break;
+                case LogType.Error:
+                    color = "Red";
+                    break;
+            }
+            
+            rtbxLogBox.AppendText(DateTime.Now.ToShortTimeString() + " | " + type.ToString() + " - " + mess + "\n", color);
+            rtbxLogBox.ScrollToEnd();
+            if (!Directory.Exists("./Logs/"))
+                Directory.CreateDirectory("./Logs/");
+            using (StreamWriter sw = File.AppendText("./Logs/SessionLog.txt"))
+            {
+                sw.Write(DateTime.Now.ToString() + " | " + type.ToString() + " - " + mess + "\r\n");
+            }
+        }
+        public static void Log(LogType type, string message)
         {
 
             if (rtbxLogBox == null) return;
-            rtbxLogBox.Dispatcher.InvokeAsync(new Action(() => LogUninvoked(message))); 
+            rtbxLogBox.Dispatcher.InvokeAsync(new Action(() => LogUninvoked(type, message))); 
         }
 
-        public static void Log(string format, params object[] args)
+        public static void Log(LogType type, string format, params object[] args)
         {
-            Log(String.Format(format, args));
+            Log(type, String.Format(format, args));
         }
 
-        public static void Log(object obj)
+        public static void Log(LogType type, object obj)
         {
-            Log(obj.ToString());
+            Log(type, obj.ToString());
         }
 
         public bool OpenFileDialog(bool save, out string filename, out string title)
@@ -93,6 +115,8 @@ namespace E_Parser.UI
         {
             string fileName, title;
             if (!OpenFileDialog(false, out fileName, out title)) return;
+            lastOpenedFile = fileName;
+            lastOpenedFileTitle = title;
             BinaryFormatter bf = new BinaryFormatter();
             using (FileStream fs = new FileStream(fileName, FileMode.Open))
             {
@@ -104,7 +128,8 @@ namespace E_Parser.UI
             foreach (var e in CurrentSession.FunctionalElements)
                 CurrentSession.RestoreTask(e);
             this.Title = title;
-            Log("Session {0} was loaded", title);
+            
+            Log(LogType.Message, "Session {0} was loaded", title);
         }
 
         private string lastOpenedFile = "";
@@ -130,7 +155,7 @@ namespace E_Parser.UI
             }
             lastOpenedFile = fileName;
             lastOpenedFileTitle = title;
-            Log("Session {0} saved", title);
+            Log(LogType.Message, "Session {0} saved", title);
         }
 
         public SessionEditor()
@@ -180,6 +205,11 @@ namespace E_Parser.UI
                         break;
                     case "tElemRestart":
                         AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemRestart));
+                        break;
+
+                    //File control
+                    case "tElemFileAppend":
+                        AddNewTask(SessionViewer.SelectedItem as ElemBase, typeof(ElemFileAppend));
                         break;
 
                     //variable control
@@ -241,7 +271,7 @@ namespace E_Parser.UI
 
         private void StartSession_Click(object sender, RoutedEventArgs e)
         {
-            CurrentSession.StartSession();
+            CurrentSession.StartSession("Start pressed");
         }
         private void SaveSession_Click(object sender, RoutedEventArgs e)
         {
@@ -277,6 +307,21 @@ namespace E_Parser.UI
         {
             SaveSession(false);
             SessionViewer.Items.Refresh();
+        }
+
+        private void ChkbxDisplayDebug_OnChecked(object sender, RoutedEventArgs e)
+        {
+            displayDebug = chkbxDisplayDebug.IsChecked.Value;
+        }
+
+        private void ChkbxDisplayDebug_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            displayDebug = chkbxDisplayDebug.IsChecked.Value;
+        }
+
+        private void btnVariableList_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

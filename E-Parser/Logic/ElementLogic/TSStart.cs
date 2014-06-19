@@ -25,7 +25,7 @@ namespace E_Parser.Logic.ElementLogic
 
         protected override object _mainTaskMethod(object args)
         {
-            SessionEditor.Log("Session started");
+           
             return null;
         }
 

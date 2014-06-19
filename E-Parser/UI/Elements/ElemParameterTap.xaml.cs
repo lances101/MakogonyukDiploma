@@ -40,23 +40,23 @@ namespace E_Parser.UI.Elements
         {
             switch (Task.PreviousTask.OutputType)
             {
-                case TSBase.ParameterTypes.None:
+                case ParameterTypes.None:
                     break;
-                case TSBase.ParameterTypes.Any:
+                case ParameterTypes.Any:
                     break;
-                case TSBase.ParameterTypes.String:
+                case ParameterTypes.String:
                     UIChanger(cmbbxStringTap);
                     break;
-                case TSBase.ParameterTypes.Double:
+                case ParameterTypes.Double:
                     break;
-                case TSBase.ParameterTypes.NodeList:
+                case ParameterTypes.NodeList:
                     break;
-                case TSBase.ParameterTypes.Node:
+                case ParameterTypes.Node:
                     UIChanger(cmbbxNodeTap);
                     break;
-                case TSBase.ParameterTypes.Boolean:
+                case ParameterTypes.Boolean:
                     break;
-                case TSBase.ParameterTypes.PassThrough:
+                case ParameterTypes.PassThrough:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

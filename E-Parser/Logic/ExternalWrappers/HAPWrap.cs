@@ -30,7 +30,7 @@ namespace E_Parser.Logic
             }
             catch (Exception e)
             {
-                SessionEditor.Log("[XPath Error] {0}" + e.Message);
+                SessionEditor.Log(LogType.Error, "XPath Error : {0}" + e.Message);
             }
             return null;
         }
@@ -42,7 +42,7 @@ namespace E_Parser.Logic
             }
             catch (Exception e)
             {
-                SessionEditor.Log("[XPath Error] {0}" + e.Message);
+                SessionEditor.Log(LogType.Error, "XPath Error : {0}" + e.Message);
             }
             return null;
         }

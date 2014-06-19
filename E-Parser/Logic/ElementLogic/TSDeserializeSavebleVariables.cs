@@ -27,7 +27,7 @@ namespace E_Parser.Logic.ElementLogic
         {
             if (!File.Exists(DirectStringInput)) return;
             XmlSerializer xml = new XmlSerializer(Session.SaveableVariables.GetType());
-            using (var fs = new FileStream(DirectStringInput, FileMode.Open))
+            using (var fs = new FileStream("./Storage/" + DirectStringInput, FileMode.Open))
             {
                 Session.SaveableVariables = xml.Deserialize(fs) as List<StoredVariable>;
             }

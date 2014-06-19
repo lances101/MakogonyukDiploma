@@ -20,8 +20,8 @@ namespace E_Parser.Logic.ElementLogic
         }
 
         protected override object _mainTaskMethod(object args)
-        {
-            Console.Beep(4000, 5000);
+        {   
+            Console.Beep(4000, 500);
             return args;
         }
 

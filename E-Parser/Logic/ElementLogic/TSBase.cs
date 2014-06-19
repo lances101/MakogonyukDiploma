@@ -22,21 +22,23 @@ namespace E_Parser.Logic.ElementLogic
         public object Result { get; set; }
     }
 
+    public enum ParameterTypes
+    {
+        None,
+        Any,
+        String,
+        Double,
+        NodeList,
+        Node,
+        Boolean,
+        PassThrough,
+        ParsedItem
+    }
+
     [Serializable]
     public abstract class TSBase
     {
-        public enum ParameterTypes
-        {
-            None,
-            Any,
-            String,
-            Double,
-            NodeList,
-            Node,
-            Boolean,
-            PassThrough,
-            ParsedItem
-        }
+        
 
         private bool _isRunning;
 

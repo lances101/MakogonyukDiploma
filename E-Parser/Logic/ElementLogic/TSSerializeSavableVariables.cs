@@ -37,7 +37,7 @@ namespace E_Parser.Logic.ElementLogic
         protected override object _mainTaskMethod(object args)
         {
             XmlSerializer xml = new XmlSerializer(Session.SaveableVariables.GetType());
-            using (var fs = new FileStream(DirectStringInput, FileMode.Create))
+            using (var fs = new FileStream("./Storage/" + DirectStringInput, FileMode.Create))
             {
                 xml.Serialize(fs, Session.SaveableVariables);
             }

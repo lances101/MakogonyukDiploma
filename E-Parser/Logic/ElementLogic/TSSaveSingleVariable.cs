@@ -34,9 +34,10 @@ namespace E_Parser.Logic.ElementLogic
 
         protected override object _mainTaskMethod(object args)
         {
-            if (Session.SaveableVariables.Contains(storedVariable))
+            var found = Session.SaveableVariables.Find(o => o.Name == storedVariable.Name);
+            if (found != null)
             {
-                
+                found.Value = storedVariable.Value;
             }
             else
                 Session.SaveableVariables.Add(storedVariable);

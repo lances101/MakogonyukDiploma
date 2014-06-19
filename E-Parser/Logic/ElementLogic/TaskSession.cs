@@ -23,6 +23,7 @@ namespace E_Parser.Logic.ElementLogic
         public List<ParsedItem> ParsedItems = new List<ParsedItem>();
         private int currentTaskIndex;
         public bool TaskIsRunning { get; set; }
+        public bool RestartOnError { get; set; }
         private bool ShouldForceStop = false;
 
         public AwesomiumWrap Client
@@ -57,15 +58,19 @@ namespace E_Parser.Logic.ElementLogic
             var start = AddNewTask(null, typeof (ElemStart));
             SaveableVariables = new List<StoredVariable>();
             AddNewTask(start, typeof(ElemEnd));
-
+            
         }
 
         #region SessionControl
-        public void StartSession()
+        public void StartSession(string reason)
         {
+            if (RestartOnError == false)
+                RestartOnError = true;
             CurrentTaskIndex = 0;
             ClearVariables();
             TaskIsRunning = true;
+            if(reason != "")
+                SessionEditor.Log(LogType.Message, "Session starting. Reason : " + reason);
             _functionalElements.ElementAt(0).StartTask(null);
             
         }
@@ -96,14 +101,24 @@ namespace E_Parser.Logic.ElementLogic
             }
             if (!e.EventSuccessful)
             {
-                EndSession(String.Format("Task error at {0}\n{1} - {2}", CurrentTaskIndex, lastTask.Name, (e.Result as Exception).Message));
+                if (RestartOnError)
+                {
+                    RestartSession(String.Format("Restarting.. Task error at {0}\n{1} - {2}", CurrentTaskIndex + 1, lastTask.Name,
+                        (e.Result as Exception).Message));
+                }
+                else
+                {
+                    EndSession(String.Format("Task error at {0}\n{1} - {2}", CurrentTaskIndex, lastTask.Name,
+                        (e.Result as Exception).Message));
+                }
+
                 return;
             }
             
             lastTask.AfterTaskEnd();
             if (lastTask.GetType() == typeof (TSRestart))
             {
-                RestartSession();
+                RestartSession("");
                 return;
             }
             if(lastTask.GetType() == typeof(TSEnd))
@@ -118,15 +133,16 @@ namespace E_Parser.Logic.ElementLogic
         {
             ShouldForceStop = false;
             TaskIsRunning = false;
-            SessionEditor.Log("[Session End] Reason : " + reason);
+            if(reason != "")
+                SessionEditor.Log(LogType.Message, "Session End. Reason : " + reason);
             
         }
 
-        public void RestartSession()
+        public void RestartSession(string reason)
         {
-            EndSession("Session restart fired");
+            EndSession(reason);
             Thread.Sleep(1000);
-            StartSession();
+            StartSession(reason);
         }
         public void ForceStop()
         {
@@ -208,7 +224,7 @@ namespace E_Parser.Logic.ElementLogic
         }
         private bool IsParameterCompatible(ElemBase origin, ElemBase adding)
         {
-            if (adding.Task.InputTypes.Contains(TSBase.ParameterTypes.Any)) return true;
+            if (adding.Task.InputTypes.Contains(ParameterTypes.Any)) return true;
             if ((from inp in adding.Task.InputTypes
                 where origin.Task.OutputType == inp
                 select inp)

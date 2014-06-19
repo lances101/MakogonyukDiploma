@@ -42,7 +42,7 @@ namespace TheE_Parser
                 }
                 catch (Exception e)
                 {
-                    SessionEditor.Log("[JS Callback] Error: " + e.Message);
+                    SessionEditor.Log(LogType.Error, "JS Callback Error: " + e.Message);
                 }
                 return "CALLBACK WITH NO ARGUMENTS";
             }
@@ -88,7 +88,7 @@ namespace TheE_Parser
             }
             catch (Exception e)
             {
-                SessionEditor.Log("[URL Validator] " + e.Message);
+                SessionEditor.Log(LogType.Error, "URL Validator Error : " + e.Message);
             }
             return false;
         }
@@ -112,7 +112,7 @@ namespace TheE_Parser
                 return;
             }
             bool isSaved = ((BitmapSurface)View.Surface).SaveToPNG(sDebugPNGSavePath);
-            SessionEditor.Log("[Debug] Saving status : " + isSaved);
+            SessionEditor.Log(LogType.Debug, "Saving status : " + isSaved);
             if (isSaved && File.Exists(sDebugPNGSavePath))
                 Process.Start(sDebugPNGSavePath);
         }
