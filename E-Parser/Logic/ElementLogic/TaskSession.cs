@@ -36,7 +36,11 @@ namespace E_Parser.Logic.ElementLogic
                 }
                 return _client;
             }
-            set { _client = value; }
+            set
+            {
+                if(_client != null)_client.Destroy();
+                _client = value;
+            }
         }
         public List<TSBase> FunctionalElements
         {

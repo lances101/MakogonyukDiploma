@@ -323,5 +323,9 @@ namespace E_Parser.UI
         {
             throw new NotImplementedException();
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+        }
     }
 }

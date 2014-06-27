@@ -8,7 +8,7 @@
         x:Class="E_Parser.UI.SessionEditor"
         Title="SessionEditor" Height="600" Width="751" 
         MinHeight="600" MinWidth="750"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Closed="Window_Closed">
     <Grid Background="#FFFF2323">
         <Grid.RowDefinitions>
             <RowDefinition Height="31*"/>

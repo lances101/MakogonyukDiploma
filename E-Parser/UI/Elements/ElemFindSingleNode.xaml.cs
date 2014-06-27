@@ -43,7 +43,7 @@ namespace E_Parser.UI.Elements
         {
            
                 int ind = Session.GetTaskIndex(Task);
-                var prevNode = Session.FunctionalElements.Last(o => o.GetType() == typeof(TSLoadUrl)  && o.Session.GetTaskIndex(o) < ind);
+                var prevNode = Session.FunctionalElements.Last(o => o.GetType() == typeof(TSLoadUrl)  && o.Session.GetTaskIndex(o) < ind).PreviousTask;
                 EPathExtractor diagWin = new EPathExtractor(prevNode.DirectStringInput);
            
                 

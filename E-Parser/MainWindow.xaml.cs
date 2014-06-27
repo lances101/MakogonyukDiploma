@@ -25,7 +25,7 @@ namespace E_Parser
         public MainWindow()
         {
             InitializeComponent();
-            //this.Hide();
+            this.Hide();
             Button_Click_1(null, null);
         }
 
@@ -34,8 +34,8 @@ namespace E_Parser
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             SessionEditor se = new SessionEditor();
-            se.Show();
-
+            se.ShowDialog();
+            this.Close();
         }
     }
 }

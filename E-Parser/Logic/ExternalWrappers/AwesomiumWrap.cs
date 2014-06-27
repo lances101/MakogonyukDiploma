@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Threading;
 using Awesomium.Core;
 //using Awesomium.Windows.Controls;
@@ -60,6 +61,11 @@ namespace TheE_Parser
             HAP = new HAPWrap(_view);
 
         }
+
+        public void Destroy()
+        {
+            _view.Dispose();
+        }
         public event JSCallbackHandler Callback;
         public HAPWrap HAP;
         WebView _view;
@@ -103,7 +109,7 @@ namespace TheE_Parser
             return View.IsLoading;
         }
 
-        private static string sDebugPNGSavePath = @"E:\Downloads\Debug\debug.png";
+        private static string sDebugPNGSavePath = @"D:\debug.png";
         public void RenderToPng()
         {
             if (View.InvokeRequired)
@@ -139,6 +145,7 @@ namespace TheE_Parser
 
         private object InvokeWithoutArguments(Delegate method)
         {
+           
             return View.Invoke(method, null);
         }
         private void ViewDocumentReady(object sender, FrameEventArgs e)
